@@ -1,1 +1,3 @@
-/api/*  https://script.google.com/macros/s/:splat  200!
+# Fallback redirects (in case netlify.toml isn't read)
+/bein  /.netlify/functions/bein  200
+/bein/* /.netlify/functions/bein  200

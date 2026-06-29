@@ -1,829 +1,755 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<link rel="preconnect" href="https://accounts.google.com">
-<link rel="preconnect" href="https://script.google.com">
-<link rel="dns-prefetch" href="https://images.unsplash.com">
-<title>الزواج المغربي — منصة راقية وآمنة للتعارف الجاد من أجل الزواج</title>
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚽ TifoTV — beIN Sports Arabic + SSC + الرياضية المباشرة 24/7</title>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js"></script>
 <style>
-:root{--bg:#060608;--card:#101014;--soft:#18181f;--muted:#9ca3af;--line:rgba(255,255,255,.09);--accent:#e50914;--green:#16a34a;--red:#dc2626;--blue:#2563eb;--yellow:#f59e0b;--text:#fff}
-*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:'Cairo',sans-serif}
-body{background:radial-gradient(1200px 600px at 85% -10%, rgba(229,9,20,.10), transparent), radial-gradient(900px 500px at 5% 110%, rgba(229,9,20,.06), transparent), #060608}
-.hidden{display:none!important}
-a{color:inherit;text-decoration:none}
+:root{
+  --bg:#06080f; --bg-1:#0d111d; --bg-2:#161b2e;
+  --txt:#e9eef9; --muted:#7c89a8; --line:rgba(255,255,255,.07);
+  --bein:#7d2cf2; --bein-2:#5b1edc;
+  --red:#ef3a4d; --green:#23c477; --gold:#f5c451; --blue:#3aa7ff;
+  --live:#ff2e63;
+  --ma-red:#c1272d; --ma-green:#006233;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
+button{font-family:inherit;cursor:pointer}
+input{font-family:inherit}
 
-/* NAV -  top bar */
-.navbar{position:sticky;top:0;z-index:90;background:linear-gradient(180deg,rgba(0,0,0,.92),rgba(0,0,0,.65) 60%, transparent);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
-.nav-inner{max-width:1500px;margin:0 auto;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.brand{font-weight:900;font-size:1.4rem;color:var(--accent);letter-spacing:-.3px;cursor:pointer}
-.nav-links{display:flex;gap:20px;flex-wrap:wrap;font-weight:800;font-size:.92rem;color:#cfcfd6}
-.nav-link{cursor:pointer;opacity:.9}.nav-link.active,.nav-link:hover{color:#fff;opacity:1}
-.top-actions{display:flex;gap:10px;align-items:center}
-.pill{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);border:1px solid var(--line);padding:8px 13px;border-radius:999px;font-weight:800;font-size:.86rem}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(700px circle at 10% 0%,rgba(125,44,242,.20),transparent 60%),
+    radial-gradient(800px circle at 90% 20%,rgba(193,39,45,.16),transparent 60%),
+    radial-gradient(900px circle at 50% 100%,rgba(0,98,51,.16),transparent 60%);
+  animation:bgShift 22s ease-in-out infinite alternate;
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;
+  background-image:
+    linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+  background-size:48px 48px;
+  mask-image:radial-gradient(ellipse at center,#000 30%,transparent 80%);
+}
+@keyframes bgShift{from{transform:translate(0,0)}to{transform:translate(-40px,30px)}}
 
-/* buttons */
-.btn{border:none;border-radius:12px;padding:11px 16px;font-weight:800;cursor:pointer;color:#fff;display:inline-flex;align-items:center;gap:8px;transition:.18s}
-.btn:hover{transform:translateY(-1px);filter:brightness(1.06)}
-.btn-primary{background:var(--accent)}
-.btn-soft{background:rgba(255,255,255,.07);border:1px solid var(--line)}
-.btn-success{background:var(--green)}
-.btn-danger{background:var(--red)}
-.btn-sm{padding:8px 12px;font-size:.84rem;border-radius:10px}
-.btn:disabled{opacity:.5;transform:none;cursor:not-allowed}
+.top{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(6,8,15,.92),rgba(6,8,15,.6));backdrop-filter:blur(16px);position:sticky;top:0;z-index:60;gap:12px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:12px;font-weight:900;font-size:18px}
+.logo-mark{width:40px;height:40px;border-radius:11px;background:conic-gradient(from 90deg,var(--bein),var(--gold),var(--ma-green),var(--ma-red),var(--bein));display:grid;place-items:center;font-size:20px;box-shadow:0 10px 30px rgba(125,44,242,.4)}
+.logo small{display:block;color:var(--muted);font-weight:500;font-size:11px}
+.search-box{display:flex;align-items:center;gap:8px;background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:8px 12px;width:280px;max-width:42vw}
+.search-box input{background:none;border:0;outline:0;color:var(--txt);width:100%;font-size:13px}
+.search-box input::placeholder{color:var(--muted)}
 
-/* inputs */
-.input{width:100%;background:#121219;border:1px solid var(--line);color:#fff;padding:13px 15px;border-radius:12px;outline:none;font-family:inherit}
-.input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(229,9,20,.15)}
-.input::placeholder{color:#7a7a85}
+/* Worker config bar */
+.worker-bar{
+  background:linear-gradient(135deg,rgba(245,196,81,.10),rgba(255,126,58,.06));
+  border-bottom:1px solid rgba(245,196,81,.2);
+  padding:10px 22px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:13px;
+}
+.worker-bar.ok{background:linear-gradient(135deg,rgba(35,196,119,.10),rgba(15,138,74,.06));border-color:rgba(35,196,119,.3)}
+.worker-bar label{color:var(--muted);font-size:12px;font-weight:600}
+.worker-bar input{flex:1;min-width:240px;background:rgba(0,0,0,.3);border:1px solid var(--line);border-radius:8px;padding:7px 12px;color:var(--txt);outline:0;font-size:12.5px;direction:ltr;text-align:left}
+.worker-bar .btn-mini{background:linear-gradient(135deg,var(--gold),#d49a1f);color:#000;border:0;padding:7px 14px;border-radius:8px;font-weight:700;font-size:12px}
+.worker-bar .btn-mini.ok{background:linear-gradient(135deg,var(--green),#0f8a4a);color:#fff}
+.worker-bar a{color:var(--gold);text-decoration:none;font-weight:600;font-size:12px}
+.worker-bar a:hover{text-decoration:underline}
+.worker-status{font-size:11.5px}
 
-/* layout */
-.page{max-width:1500px;margin:0 auto;padding:18px}
-.section{padding-top:84px}
-.card{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:20px}
-.small{color:var(--muted);font-size:.84rem}
+/* Hero */
+.hero{max-width:1480px;margin:18px auto;padding:0 22px}
+.match-card{position:relative;overflow:hidden;border-radius:22px;padding:22px 26px;background:linear-gradient(135deg,rgba(193,39,45,.22),rgba(255,105,0,.10) 50%,rgba(33,70,139,.20)),rgba(22,27,46,.6);border:1px solid var(--line);backdrop-filter:blur(14px);display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:center;box-shadow:0 18px 50px rgba(0,0,0,.4)}
+.team{display:flex;flex-direction:column;align-items:center;gap:8px}
+.flag{width:74px;height:74px;border-radius:50%;display:grid;place-items:center;font-size:44px;box-shadow:0 10px 26px rgba(0,0,0,.5),inset 0 0 0 3px rgba(255,255,255,.08);transition:transform .35s cubic-bezier(.34,1.56,.64,1)}
+.team:hover .flag{transform:scale(1.08) rotate(-4deg)}
+.flag.nl{background:linear-gradient(135deg,#ff6900,#b34800)}
+.flag.ma{background:linear-gradient(135deg,#c1272d,#7a0d12)}
+.team-name{font-size:18px;font-weight:800}
+.team-sub{font-size:11px;color:var(--muted)}
+.vs-block{display:flex;flex-direction:column;align-items:center;gap:8px}
+.vs-text{font-size:32px;font-weight:900;background:linear-gradient(135deg,var(--gold),#ff7e3a);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:2px}
+.cd{display:flex;gap:6px;direction:ltr}
+.cd-box{min-width:48px;background:rgba(0,0,0,.45);border:1px solid var(--line);border-radius:9px;padding:7px 10px;text-align:center}
+.cd-num{font-size:18px;font-weight:800;color:var(--gold)}
+.cd-lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+.match-meta{font-size:11px;color:var(--muted);margin-top:2px}
 
-/* HERO */
-.hero-{position:relative;border-radius:22px;overflow:hidden;min-height:380px;display:flex;align-items:end;background:#111}
-.hero-::before{content:'';position:absolute;inset:0;background:linear-gradient(to top, #060608 8%, rgba(6,6,8,.55) 45%, rgba(6,6,8,.2));z-index:1}
-.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=2200&auto=format&fit=crop') center/cover;filter:saturate(.95) brightness(.9)}
-.hero-inner{position:relative;z-index:2;padding:34px;max-width:760px}
-.hero-kicker{color:var(--accent);font-weight:900;font-size:.9rem;margin-bottom:8px}
-.hero-title{font-size:clamp(2rem,4.5vw,3.6rem);font-weight:900;line-height:1.05;margin:0}
-.hero-sub{color:#d1d5db;margin:12px 0 18px;line-height:1.85}
+.main{max-width:1480px;margin:0 auto;padding:0 22px 60px;display:grid;grid-template-columns:1fr 380px;gap:18px}
+@media(max-width:1080px){.main{grid-template-columns:1fr}.search-box{width:200px}}
+@media(max-width:680px){.match-card{grid-template-columns:1fr;text-align:center}.vs-text{font-size:24px}.top{padding:12px 14px}.search-box{display:none}}
 
-/* SEARCH BAR –  style */
-.search-shell{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:rgba(0,0,0,.5);border:1px solid var(--line);padding:10px;border-radius:16px}
-.search-input{flex:1 1 320px;min-width:220px}
-.search-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.chip{padding:8px 13px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);font-weight:800;font-size:.84rem;cursor:pointer}
-.chip.active,.chip:hover{background:var(--accent);border-color:transparent}
-.results-bar{display:flex;justify-content:space-between;align-items:center;padding:10px 2px;color:#b8b8c2;font-size:.9rem}
+/* Player */
+.player-wrap{position:relative;border-radius:18px;overflow:hidden;background:#000;aspect-ratio:16/9;border:1px solid var(--line);box-shadow:0 22px 60px rgba(0,0,0,.6),0 0 0 1px rgba(125,44,242,.12)}
+.player-wrap video{width:100%;height:100%;display:block;background:#000;object-fit:contain}
+.placeholder{position:absolute;inset:0;display:grid;place-items:center;background:radial-gradient(circle at center,rgba(125,44,242,.3),#000);color:var(--muted);text-align:center;padding:20px;z-index:2}
+.placeholder.hide{display:none}
+.ph-icon{font-size:56px;margin-bottom:10px;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.placeholder h2{font-size:20px;color:var(--txt);font-weight:800;margin-bottom:6px}
 
-/* GRID */
-.nf-row-title{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.18rem;margin:22px 0 12px}
-.nf-row-title::before{content:'';width:4px;height:22px;background:var(--accent);border-radius:3px}
-.member-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:14px}
-@media(min-width:1400px){.member-grid{grid-template-columns:repeat(auto-fill,minmax(185px,1fr))}}
-@media(max-width:520px){.member-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}}
+.loading-overlay{position:absolute;inset:0;background:rgba(0,0,0,.75);display:none;z-index:5;color:#fff;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+.loading-overlay.show{display:flex}
+.spinner{width:48px;height:48px;border-radius:50%;border:4px solid rgba(255,255,255,.12);border-top-color:var(--bein);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.error-overlay{position:absolute;inset:0;background:rgba(0,0,0,.92);display:none;z-index:6;color:#fff;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:20px;text-align:center}
+.error-overlay.show{display:flex}
+.error-overlay h3{color:var(--red);font-size:22px}
 
-/*  poster card */
-.nf-card{position:relative;border-radius:14px;overflow:hidden;background:#12121a;border:1px solid rgba(255,255,255,.07);transition:transform .22s ease, box-shadow .22s ease, border-color .22s;cursor:pointer}
-.nf-card:hover{transform:scale(1.045) translateY(-4px);z-index:5;box-shadow:0 18px 50px rgba(0,0,0,.55);border-color:rgba(229,9,20,.45)}
-.nf-poster{aspect-ratio:2/3;width:100%;background:#15151d center/cover no-repeat;position:relative}
-.nf-poster::after{content:'';position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.92) 0%, rgba(0,0,0,.35) 38%, transparent 60%)}
-.nf-top-badge{position:absolute;top:8px;right:8px;z-index:2;background:rgba(229,9,20,.93);color:#fff;font-size:.70rem;font-weight:900;padding:5px 8px;border-radius:999px}
-.nf-overlay{position:absolute;bottom:0;left:0;right:0;padding:10px 10px 11px;z-index:2}
-.nf-name{font-weight:900;font-size:.96rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.nf-meta{font-size:.78rem;color:#c8c8d2;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.nf-stars{font-size:.78rem;color:#fbbf24;margin-top:4px}
-.nf-hover-actions{position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.88), rgba(0,0,0,.22));display:flex;align-items:end;justify-content:center;gap:8px;padding:12px;opacity:0;transition:.18s}
-.nf-card:hover .nf-hover-actions{opacity:1}
-.nf-icon-btn{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:16px;cursor:pointer}
-.nf-icon-btn.primary{background:var(--accent);border-color:transparent}
+.np-bar{margin-top:12px;background:rgba(22,27,46,.55);border:1px solid var(--line);border-radius:14px;padding:12px 14px;backdrop-filter:blur(10px);display:flex;flex-direction:column;gap:10px}
+.np-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.np-badge{background:var(--live);color:#fff;padding:4px 10px;border-radius:7px;font-size:10px;font-weight:800;letter-spacing:1.2px}
+.np-name{font-weight:700;font-size:14px;flex:1;min-width:140px}
+.np-name small{display:block;color:var(--muted);font-weight:500;font-size:11px;margin-top:2px}
+.btn{background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--txt);padding:7px 12px;border-radius:9px;font-size:12px;display:inline-flex;align-items:center;gap:5px;transition:.2s;text-decoration:none}
+.btn:hover{background:rgba(255,255,255,.12);transform:translateY(-1px)}
+.btn.primary{background:linear-gradient(135deg,var(--bein),var(--bein-2));border-color:transparent;font-weight:700;color:#fff}
 
-/* search highlight */
-mark.hl{background:rgba(229,9,20,.28);color:#fff;padding:0 2px;border-radius:3px}
+.quality-pick{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-top:10px;border-top:1px dashed var(--line)}
+.quality-lbl{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.8px}
+.q-btn{padding:5px 10px;font-size:11px;border-radius:7px;font-weight:700;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--txt);transition:.2s}
+.q-btn:hover{background:rgba(255,255,255,.1)}
+.q-btn.active{background:linear-gradient(135deg,var(--gold),#d49a1f);border-color:transparent;color:#000}
 
-/* GUIDE page redesign */
-.guide-hero{display:grid;grid-template-columns:92px 1fr;gap:16px;align-items:center;padding:22px;background:linear-gradient(135deg, rgba(229,9,20,.10), rgba(255,255,255,.03));border:1px solid var(--line);border-radius:18px}
-.guide-avatar{width:84px;height:84px;border-radius:20px;object-fit:cover;border:2px solid rgba(229,9,20,.4);background:#18181f}
-.guide-quick{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-.icon-send{display:inline-flex;align-items:center;gap:8px}
-.guide-terms{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
-.term-box{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:14px;padding:14px 15px;font-size:.9rem;line-height:1.85}
-.term-box b{color:#fff}
-.term-icon{font-size:1.15rem;margin-left:6px}
+.sidebar{display:flex;flex-direction:column;gap:14px}
+.panel{background:rgba(22,27,46,.55);border:1px solid var(--line);border-radius:16px;padding:14px;backdrop-filter:blur(10px)}
+.panel h3{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1.4px;margin-bottom:12px;display:flex;align-items:center;gap:8px;font-weight:700}
+.panel h3::before{content:"";width:3px;height:14px;background:linear-gradient(180deg,var(--bein),var(--gold));border-radius:2px}
+.tabs{display:flex;gap:5px;background:rgba(0,0,0,.32);padding:4px;border-radius:11px;margin-bottom:12px;flex-wrap:wrap}
+.tab{flex:1;min-width:54px;padding:7px 8px;background:none;border:0;color:var(--muted);border-radius:8px;font-size:11px;font-weight:700;transition:.2s}
+.tab:hover{color:var(--txt)}
+.tab.active{background:linear-gradient(135deg,var(--bein),var(--bein-2));color:#fff;box-shadow:0 3px 10px rgba(125,44,242,.4)}
 
-/* chat */
-.chat-layout{display:grid;grid-template-columns:330px 1fr;gap:16px}
-@media(max-width:1020px){.chat-layout{grid-template-columns:1fr}}
-.chat-box{min-height:520px;display:flex;flex-direction:column;padding:16px}
-.messages{flex:1;overflow:auto;display:flex;flex-direction:column;gap:9px;padding:6px 0}
-.message{max-width:78%;padding:11px 13px;border-radius:16px;line-height:1.8}
-.message.me{align-self:flex-start;background:rgba(229,9,20,.16);border:1px solid rgba(229,9,20,.28)}
-.message.them{align-self:flex-end;background:rgba(255,255,255,.05);border:1px solid var(--line)}
-.message small{display:block;font-size:.70rem;color:#b3b3bb;margin-top:4px}
-.compose{display:flex;gap:9px;margin-top:10px}
-.empty-box{text-align:center;padding:42px 12px;color:var(--muted)}
+.section-title{font-size:11px;color:var(--gold);font-weight:800;text-transform:uppercase;letter-spacing:1.2px;margin:12px 0 6px;padding:0 4px;display:flex;align-items:center;gap:8px}
+.section-title::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(245,196,81,.4),transparent)}
 
-/* misc */
-.status{display:inline-flex;padding:6px 10px;border-radius:999px;font-size:.78rem;font-weight:900}
-.status.pending{background:rgba(245,158,11,.13);color:#fbbf24}
-.status.accepted{background:rgba(34,197,94,.13);color:#4ade80}
-.status.rejected{background:rgba(239,68,68,.13);color:#f87171}
-.status.processing{background:rgba(59,130,246,.13);color:#60a5fa}
-.spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:sp .75s linear infinite}
-@keyframes sp{to{transform:rotate(360deg)}}
-.user-menu{position:relative}
-.dropdown{position:absolute;top:calc(100% + 8px);left:0;background:#121219;border:1px solid var(--line);border-radius:14px;padding:6px;min-width:210px;box-shadow:0 18px 45px rgba(0,0,0,.5);opacity:0;visibility:hidden;transform:translateY(-6px);transition:.18s;z-index:50}
-.user-menu:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0)}
-.drop-item{padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:700;color:#d6d6de}
-.drop-item:hover{background:rgba(255,255,255,.07);color:#fff}
+.ch-list{display:flex;flex-direction:column;gap:6px;max-height:680px;overflow-y:auto;padding-left:4px}
+.ch-list::-webkit-scrollbar{width:5px}
+.ch-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);border-radius:3px}
+.ch{display:flex;align-items:center;gap:11px;padding:9px 11px;background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:11px;cursor:pointer;transition:.2s;text-align:right}
+.ch:hover{background:rgba(255,255,255,.06);transform:translateX(-3px)}
+.ch.active{background:linear-gradient(135deg,rgba(125,44,242,.28),rgba(91,30,220,.18));border-color:var(--bein);box-shadow:0 5px 14px rgba(125,44,242,.25)}
+.ch.disabled{opacity:.45;cursor:not-allowed}
+.ch.disabled:hover{transform:none}
+.ch-icon{width:42px;height:42px;border-radius:9px;background:rgba(255,255,255,.06);display:grid;place-items:center;font-size:10px;font-weight:800;flex-shrink:0;text-align:center;line-height:1.05;color:#fff;padding:3px}
+.ch-icon.bein{background:linear-gradient(135deg,#7d2cf2,#3a0ea6)}
+.ch-icon.ar-ma{background:linear-gradient(135deg,#c1272d,#006233)}
+.ch-icon.ssc{background:linear-gradient(135deg,#006c35,#003318)}
+.ch-icon.dubai,.ch-icon.uae{background:linear-gradient(135deg,#ce1126,#000)}
+.ch-icon.fr{background:linear-gradient(135deg,#0055a4,#ef4135)}
+.ch-icon.tr{background:linear-gradient(135deg,#e30a17,#fff,#e30a17)}
+.ch-icon.es{background:linear-gradient(135deg,#c60b1e,#ffc400)}
+.ch-icon.usa{background:linear-gradient(135deg,#bf0a30,#002868)}
+.ch-info{flex:1;min-width:0}
+.ch-name{font-size:13px;font-weight:600;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ch-meta{font-size:11px;color:var(--muted);margin-top:3px;display:flex;gap:5px;align-items:center;flex-wrap:wrap}
+.tag{font-size:9px;padding:1px 5px;border-radius:4px;font-weight:700;letter-spacing:.4px}
+.tag.live{background:rgba(35,196,119,.18);color:#4ade80}
+.tag.ar{background:rgba(193,39,45,.2);color:#fda4af}
+.tag.en{background:rgba(58,167,255,.18);color:#7dd3fc}
+.tag.fr{background:rgba(125,44,242,.2);color:#c4a8ff}
+.tag.es{background:rgba(245,196,81,.2);color:var(--gold)}
+.tag.tr{background:rgba(255,255,255,.1);color:#fff}
+.tag.cors{background:rgba(35,196,119,.18);color:#4ade80}
+.tag.wrk{background:rgba(125,44,242,.2);color:#c4a8ff}
+.tag.fav{background:rgba(245,196,81,.2);color:var(--gold)}
+
+.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--line);font-size:12.5px}
+.row:last-child{border:0}
+.row span:first-child{color:var(--muted)}
+
+footer{text-align:center;padding:20px;color:var(--muted);font-size:11.5px;border-top:1px solid var(--line)}
+.toast{position:fixed;bottom:20px;right:20px;background:rgba(22,27,46,.96);border:1px solid rgba(125,44,242,.4);padding:12px 18px;border-radius:11px;color:var(--txt);font-size:12.5px;box-shadow:0 10px 28px rgba(0,0,0,.5);transform:translateX(420px);transition:transform .4s cubic-bezier(.34,1.56,.64,1);z-index:100;max-width:340px}
+.toast.show{transform:translateX(0)}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero,.main{animation:slideUp .55s ease-out both}
+.main{animation-delay:.1s}
+
+/* Setup modal */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);display:none;z-index:200;align-items:center;justify-content:center;padding:20px}
+.modal-bg.show{display:flex}
+.modal{background:var(--bg-1);border:1px solid var(--line);border-radius:16px;padding:24px;max-width:560px;width:100%;max-height:90vh;overflow-y:auto}
+.modal h2{font-size:20px;font-weight:800;margin-bottom:12px;color:var(--gold)}
+.modal ol{padding-right:20px;margin:14px 0;color:var(--txt);line-height:1.9;font-size:13.5px}
+.modal ol li{margin-bottom:6px}
+.modal code{background:rgba(255,255,255,.06);padding:1px 6px;border-radius:4px;font-size:12px;direction:ltr;display:inline-block}
+.modal a{color:var(--gold)}
+.modal pre{background:rgba(0,0,0,.4);padding:10px;border-radius:8px;font-size:11px;overflow-x:auto;direction:ltr;text-align:left;border:1px solid var(--line);margin:8px 0;color:#a7f3d0}
+.modal .x{position:absolute;top:10px;left:10px;background:none;border:0;color:var(--muted);font-size:22px}
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
-<section id="screen-login">
-<div style="min-height:100vh;display:grid;place-items:center;background:url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2000&auto=format&fit=crop') center/cover">
-  <div style="background:rgba(0,0,0,.74);backdrop-filter:blur(14px);border:1px solid var(--line);padding:32px;border-radius:22px;width:min(92%,500px);text-align:center">
-    <h1 style="font-size:2rem;margin:0 0 6px;font-weight:900">الزواج <span style="color:var(--accent)">المغربي</span></h1>
-    <p class="small" style="margin-bottom:18px">منصة راقية وآمنة للتعارف الجاد من أجل الزواج</p>
-    <div id="g_id_signin" style="display:flex;justify-content:center"></div>
-    <p id="login-status" class="small" style="min-height:1.4em;margin-top:12px"></p>
+<header class="top">
+  <div class="logo">
+    <div class="logo-mark">⚽</div>
+    <div>TifoTV<small>beIN عربي • SSC • Dubai • الرياضية</small></div>
   </div>
-</div>
-</section>
-
-<!-- SETUP -->
-<section id="screen-setup" class="hidden section">
-  <div class="page">
-    <div class="card" style="padding:24px;max-width:900px;margin:auto">
-      <h2 style="margin:0 0 6px;font-weight:900;font-size:1.6rem">أكمل ملفك الشخصي</h2>
-      <p class="small" id="setup-greeting"></p>
-      <form id="profile-form" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px">
-        <div><label class="small">الاسم</label><input id="f-name" class="input" required></div>
-        <div><label class="small">البريد</label><input id="f-email" class="input" readonly dir="ltr"></div>
-        <div><label class="small">العمر</label><input id="f-age" type="number" min="18" max="99" class="input" required></div>
-        <div><label class="small">الجنس</label><select id="f-gender" class="input" required><option value="">اختر...</option><option value="ذكر">ذكر</option><option value="أنثى">أنثى</option></select></div>
-        <div><label class="small">الحالة العائلية</label><select id="f-status" class="input"><option>أعزب / عزباء</option><option>مطلق / مطلقة</option><option>أرمل / أرملة</option></select></div>
-        <div><label class="small">الطول</label><select id="f-height" class="input"><option>لا أعلم</option><option>أقل من 150 سم</option><option>150 - 160 سم</option><option>160 - 170 سم</option><option>170 - 180 سم</option><option>أطول من 180 سم</option></select></div>
-        <div><label class="small">مكان الإقامة</label><input id="f-location" class="input" required></div>
-        <div><label class="small">المدينة الأصلية</label><input id="f-birthCity" class="input" required></div>
-        <div style="grid-column:1/-1"><label class="small">نبذة عنك</label><textarea id="f-specs" class="input" rows="4"></textarea></div>
-        <div style="grid-column:1/-1;display:flex;gap:14px;align-items:center">
-          <img id="img-preview" style="width:88px;height:104px;border-radius:12px;object-fit:cover;background:#1a1a22" src="">
-          <div>
-            <label class="btn btn-soft" style="cursor:pointer">اختر صورة<input id="img-file" type="file" accept="image/*" hidden></label>
-            <div id="img-status" class="small" style="margin-top:6px">رفع آمن عبر imgbb</div>
-          </div>
-        </div>
-        <div style="grid-column:1/-1"><button class="btn btn-primary" style="width:100%" type="submit"><span id="btn-save-label">حفظ ودخول المنصة</span><span id="btn-save-spinner" class="spinner hidden"></span></button>
-        <p id="setup-error" style="color:#f87171;display:none;margin-top:8px;font-size:.9rem"></p></div>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- APP -->
-<section id="screen-app" class="hidden">
-<header class="navbar">
-  <div class="nav-inner">
-    <div style="display:flex;align-items:center;gap:22px">
-      <div class="brand" onclick="navigate('home')">الزواج المغربي</div>
-      <div class="nav-links" id="main-nav">
-        <span class="nav-link active" data-nav="home">تصفح</span>
-        <span class="nav-link" data-nav="requests">الطلبات</span>
-        <span class="nav-link" data-nav="guide">الموجه</span>
-        <span class="nav-link" data-nav="conversations">المحادثات</span>
-        <span class="nav-link" data-nav="profile">حسابي</span>
-        <span class="nav-link" id="nav-admin-link" data-nav="admin" style="display:none;color:#fbbf24">لوحة الموجه</span>
-      </div>
-    </div>
-    <div class="top-actions">
-      <div class="user-menu">
-        <div class="pill"><img id="nav-photo" style="width:28px;height:28px;border-radius:50%;object-fit:cover" src=""><span id="nav-name">—</span></div>
-        <div class="dropdown">
-          <div class="drop-item" onclick="navigate('profile')">👤 حسابي</div>
-          <div class="drop-item" onclick="navigate('requests')">💌 الطلبات</div>
-          <div class="drop-item" onclick="navigate('guide')">🧭 الموجه</div>
-          <div class="drop-item" onclick="navigate('conversations')">💬 المحادثات</div>
-          <div class="drop-item" id="btn-logout" style="color:#f87171">🚪 خروج</div>
-        </div>
-      </div>
-    </div>
+  <div class="search-box">
+    <span>🔍</span>
+    <input id="search" placeholder="ابحث... (beIN 1, SSC...)">
   </div>
 </header>
 
-<!-- HOME -->
-<div id="view-home" class="page section">
-  <!--  hero -->
-  <div class="hero- card" style="border:none">
-    <div class="hero-bg"></div>
-    <div class="hero-inner">
-      <div class="hero-kicker">الزواج المغربي • منصة راقية وآمنة للتعارف الجاد من أجل الزواج</div>
-      <h1 class="hero-title">اكتشف شريك حياتك</h1>
-      <p class="hero-sub">تصفح أنيق، بحث ذكي عربي حساس، طلبات اهتمام، ومحادثات بعد القبول، مع مرافقة الموجه.</p>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button class="btn btn-primary" onclick="document.getElementById('members-section').scrollIntoView({behavior:'smooth'})">▶ ابدأ التصفح</button>
-        <button class="btn btn-soft" onclick="navigate('guide')">🧭 تحدث مع الموجه</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Smart Search -->
-  <div style="margin-top:18px" class="card" id="search-card" >
-    <div style="padding:16px">
-      <div class="search-shell">
-        <input id="q" class="input search-input" placeholder="ابحث بالاسم، المدينة، العمر، المواصفات… مثال: الدار البيضاء 28 مهندسة" autocomplete="off">
-        <div class="search-meta">
-          <button class="chip active" data-filter-gender="all">الكل</button>
-          <button class="chip" data-filter-gender="أنثى">👩 إناث</button>
-          <button class="chip" data-filter-gender="ذكر">👨 ذكور</button>
-          <button class="btn btn-soft btn-sm" id="btn-clear-search">مسح ✕</button>
-        </div>
-      </div>
-      <div class="results-bar">
-        <span id="search-stats">—</span>
-        <span class="small">بحث فوري حساس • يدعم مئات الحسابات</span>
-      </div>
-    </div>
-  </div>
-
-  <!--  rows -->
-  <div id="members-section">
-    <div class="nf-row-title">ترشيحات لك اليوم</div>
-    <div id="members-grid" class="member-grid"></div>
-    <div id="profiles-empty" class="empty-box hidden">لا توجد نتائج مطابقة. جرّب كلمات أقل.</div>
-  </div>
+<!-- Worker config -->
+<div class="worker-bar" id="workerBar">
+  <span>🔑</span>
+  <label>رابط Worker:</label>
+  <input id="workerUrl" placeholder="https://tifotv-bein.YOUR-NAME.workers.dev" />
+  <button class="btn-mini" id="saveWorker">حفظ + اختبار</button>
+  <span class="worker-status" id="workerStatus">⚠ بدون Worker، فقط القنوات الحرة تعمل</span>
+  <a href="#" id="setupHelp">🎓 كيف أنشئ worker؟ (5 دقائق، مجاناً)</a>
 </div>
 
-<!-- GUIDE – NEW REDESIGN -->
-<div id="view-guide" class="hidden page section">
-  <div class="card" style="padding:20px">
-    <div class="guide-hero">
-      <img id="guide-photo" class="guide-avatar" src="https://ui-avatars.com/api/?name=%D8%A7%D9%84%D9%85%D9%88%D8%AC%D9%87&background=E50914&color=fff&size=256" alt="">
-      <div>
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-          <h2 style="margin:0;font-size:1.6rem;font-weight:900">الموجه</h2>
-          <span class="status accepted">ADMIN • متاح</span>
-          <span class="status processing" style="cursor:default">💬 مراسلة آمنة</span>
-        </div>
-        <p class="small" style="margin:8px 0 0;line-height:1.9">
-          تحدث مع الموجه داخل المنصة فقط. لديك <b>5 رسائل</b> في كل دفعة، ثم تنتظر رد الموجه ليُعاد فتح 5 رسائل جديدة.
-        </p>
-        <div class="guide-quick">
-          <button id="guide-request-btn" class="btn btn-success icon-send">📨 طلب التحدث مع الموجه</button>
-          <span id="guide-request-status" class="status processing hidden">في طور المعالجة…</span>
-          <span id="guide-remaining-box" class="status pending hidden">الرسائل المتبقية: 5</span>
-        </div>
+<section class="hero">
+  <div class="match-card">
+    <div class="team"><div class="flag nl">🇳🇱</div><div class="team-name">Netherlands</div><div class="team-sub">هولندا</div></div>
+    <div class="vs-block">
+      <div class="vs-text">VS</div>
+      <div class="cd" id="countdown">
+        <div class="cd-box"><div class="cd-num" id="cdD">00</div><div class="cd-lbl">days</div></div>
+        <div class="cd-box"><div class="cd-num" id="cdH">00</div><div class="cd-lbl">hrs</div></div>
+        <div class="cd-box"><div class="cd-num" id="cdM">00</div><div class="cd-lbl">min</div></div>
+        <div class="cd-box"><div class="cd-num" id="cdS">00</div><div class="cd-lbl">sec</div></div>
       </div>
+      <div class="match-meta">⏰ 29 Jun 2026 • 21:00 UTC • 22:00 المغرب</div>
     </div>
-
-    <!-- chat -->
-    <div id="guide-chat-wrapper" class="hidden" style="margin-top:16px">
-      <div class="card chat-box">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-          <h3 style="margin:0;font-weight:900">🧭 محادثة مع الموجه</h3>
-          <span class="small">مشفرة داخل المنصة</span>
-        </div>
-        <div id="guide-messages" class="messages"></div>
-        <div class="compose">
-          <input id="guide-message-input" class="input" placeholder="اكتب رسالتك للموجه… 📩">
-          <button id="guide-send-btn" class="btn btn-primary">إرسال ✈️</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- شروط الإرسال -->
-    <div style="margin-top:18px">
-      <h3 style="margin:0 0 10px;font-weight:900">📜 شروط إرسال الرسائل للموجه</h3>
-      <div class="guide-terms">
-        <div class="term-box"><span class="term-icon">🤝</span><b>الاحترام المتبادل</b><br>التواصل بأدب واحترام كامل، يمنع أي إساءة لفظية.</div>
-        <div class="term-box"><span class="term-icon">🚫</span><b>يمنع السب أو التحرش</b><br>أي تحرش أو إلحاح أو كلام غير لائق = حظر فوري.</div>
-        <div class="term-box"><span class="term-icon">💍</span><b>نية الزواج الجاد فقط</b><br>المنصة للتعارف الجاد بغرض الزواج الحلال.</div>
-        <div class="term-box"><span class="term-icon">🔒</span><b>احترام الخصوصية</b><br>لا تشارك بيانات الآخرين، ولا تطلب أرقام خارج المنصة إلا بعد القبول.</div>
-        <div class="term-box"><span class="term-icon">📨</span><b>5 رسائل فقط</b><br>لكل دفعة 5 رسائل. انتظر رد الموجه لإعادة التفعيل.</div>
-        <div class="term-box"><span class="term-icon">📷</span><b>صور حقيقية</b><br>يمنع انتحال الشخصية أو صور لا تخص صاحب الحساب.</div>
-      </div>
-      <p class="small" style="margin-top:10px">بالضغط على “طلب التحدث” أنت توافق على هذه الشروط. المخالفة تؤدي لحذف الحساب نهائيًا.</p>
-    </div>
+    <div class="team"><div class="flag ma">🇲🇦</div><div class="team-name">Morocco</div><div class="team-sub">أُسود الأطلس</div></div>
   </div>
-</div>
-
-<!-- REQUESTS -->
-<div id="view-requests" class="hidden page section">
-  <div class="card" style="padding:18px">
-    <h2 style="margin:0 0 8px;font-weight:900">الطلبات</h2>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-      <div><h4>الواردة <span id="incoming-count" class="status pending">0</span></h4><div id="incoming-requests"></div></div>
-      <div><h4>المرسلة <span id="outgoing-count" class="status pending">0</span></h4><div id="outgoing-requests"></div></div>
-    </div>
-  </div>
-</div>
-
-<!-- CONVERSATIONS -->
-<div id="view-conversations" class="hidden page section">
-  <div class="card" style="padding:18px">
-    <h2 style="margin:0 0 12px;font-weight:900">المحادثات الخاصة</h2>
-    <div class="chat-layout">
-      <div class="card" style="padding:12px;max-height:600px;overflow:auto"><div id="conversations-list"></div></div>
-      <div class="card chat-box">
-        <div><div id="conversation-title" style="font-weight:900;font-size:1.1rem">اختر محادثة</div><div id="conversation-sub" class="small">—</div></div>
-        <div id="conversation-messages" class="messages"></div>
-        <div class="compose"><input id="conversation-input" class="input" placeholder="اكتب رسالتك…"><button id="conversation-send-btn" class="btn btn-primary">إرسال</button></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- PROFILE -->
-<div id="view-profile" class="hidden page section">
-  <div class="card" style="padding:20px;max-width:980px;margin:auto">
-    <h2 style="margin:0 0 12px;font-weight:900">حسابي</h2>
-    <form id="me-form" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-      <div style="grid-column:1/-1"><label class="small">الاسم</label><input id="me-name-input" class="input"></div>
-      <div><label class="small">العمر</label><input id="me-age" type="number" class="input"></div>
-      <div><label class="small">الجنس</label><select id="me-gender" class="input"><option>ذكر</option><option>أنثى</option></select></div>
-      <div><label class="small">مكان الإقامة</label><input id="me-location" class="input"></div>
-      <div><label class="small">المدينة الأصلية</label><input id="me-birthCity" class="input"></div>
-      <div><label class="small">الطول</label><select id="me-height" class="input"><option>لا أعلم</option><option>أقل من 150 سم</option><option>150 - 160 سم</option><option>160 - 170 سم</option><option>170 - 180 سم</option><option>أطول من 180 سم</option></select></div>
-      <div><label class="small">الحالة</label><select id="me-status" class="input"><option>أعزب / عزباء</option><option>مطلق / مطلقة</option><option>أرمل / أرملة</option></select></div>
-      <div style="grid-column:1/-1"><label class="small">نبذة</label><textarea id="me-specs" class="input" rows="4"></textarea></div>
-      <div style="grid-column:1/-1;display:flex;gap:10px">
-        <button class="btn btn-primary" type="submit" id="btn-me-save"><span id="btn-me-label">حفظ</span><span id="btn-me-spinner" class="spinner hidden"></span></button>
-        <button type="button" id="btn-me-delete" class="btn btn-danger">حذف حسابي</button>
-        <span id="me-ok" class="small" style="display:none;color:#4ade80">تم الحفظ ✓</span>
-        <span id="me-error" class="small" style="display:none;color:#f87171"></span>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- ADMIN -->
-<div id="view-admin" class="hidden page section">
-  <div class="card" style="padding:18px">
-    <h2 style="margin:0;font-weight:900">لوحة الموجه 🛡️</h2>
-    <p class="small">ADMIN</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0">
-      <div class="term-box">الحسابات<br><b id="admin-total-profiles" style="font-size:1.6rem">0</b></div>
-      <div class="term-box">طلبات الاهتمام<br><b id="admin-total-requests" style="font-size:1.6rem">0</b></div>
-      <div class="term-box">طلبات التحدث<br><b id="admin-total-guide-requests" style="font-size:1.6rem">0</b></div>
-      <div class="term-box">إعادة التسجيل<br><b id="admin-total-pending-approvals" style="font-size:1.6rem">0</b></div>
-      <div class="term-box">الرسائل<br><b id="admin-total-messages" style="font-size:1.6rem">0</b></div>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-      <div class="card" style="padding:14px"><h4>طلبات التحدث</h4><div id="admin-guide-requests"></div></div>
-      <div class="card" style="padding:14px"><h4>إعادة التسجيل</h4><div id="admin-registration-requests"></div></div>
-    </div>
-    <div class="card" style="padding:14px;margin-top:14px"><h4>المستخدمون</h4><div id="admin-users-list"></div></div>
-    <div class="card" style="padding:14px;margin-top:14px">
-      <h4>محادثات الموجه</h4>
-      <div style="display:grid;grid-template-columns:320px 1fr;gap:12px">
-        <div id="admin-chat-requests-list" style="max-height:460px;overflow:auto"></div>
-        <div>
-          <div id="admin-conversation-title" style="font-weight:900">اختر طلبًا</div>
-          <div id="admin-conversation-sub" class="small">—</div>
-          <div id="admin-conversation-messages" class="messages" style="height:340px"></div>
-          <div class="compose"><input id="admin-message-input" class="input" placeholder="رد الموجه…"><button id="admin-send-btn" class="btn btn-primary">إرسال</button></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- detail modal -->
-<div id="detail-page" style="position:fixed;inset:0;background:#060608;z-index:200;overflow:auto;transform:translateY(105%);transition:.28s" class="">
-  <button id="detail-close" style="position:fixed;top:14px;left:14px;z-index:10;background:rgba(0,0,0,.6);border:1px solid var(--line);color:#fff;border-radius:50%;width:40px;height:40px;cursor:pointer">✕</button>
-  <div id="detail-hero" style="min-height:56vh;display:flex;align-items:end;padding:26px 5%;background-size:cover;background-position:center;position:relative">
-    <div style="position:absolute;inset:0;background:linear-gradient(to top,#060608,rgba(0,0,0,.55),transparent)"></div>
-    <div style="position:relative;z-index:2">
-      <h2 id="detail-name" style="font-size:2.2rem;margin:0;font-weight:900"></h2>
-      <p id="detail-meta" style="color:var(--accent);font-weight:800;margin:6px 0"></p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin:8px 0" id="detail-tags">
-        <span id="detail-location" class="chip"></span>
-        <span id="detail-birth" class="chip"></span>
-        <span id="detail-height" class="chip"></span>
-        <span id="detail-status" class="chip"></span>
-      </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin:10px 0">
-        <button id="detail-interest-btn" class="btn btn-primary">مهتم ❤️</button>
-        <button id="detail-chat-btn" class="btn btn-success hidden">دخول المحادثة 💬</button>
-      </div>
-      <div id="detail-rating-line" class="small"></div>
-      <div id="detail-rate-stars" style="margin:6px 0"></div>
-    </div>
-  </div>
-  <div style="padding:20px 5%;max-width:900px">
-    <h3 style="font-weight:900">نبذة شخصية</h3>
-    <p id="detail-specs-full" style="line-height:2;color:#d6d6de;white-space:pre-wrap"></p>
-  </div>
-</div>
-
-<footer style="text-align:center;padding:30px;color:#6b7280;font-size:.85rem">الزواج المغربي © <span id="year"></span> — منصة راقية وآمنة • خصوصية وأمان</footer>
 </section>
 
-<script>
-/* ===== CONFIG ===== */
-const CONFIG = {
-  API_URL: window.MATCHNEST_API_URL || 'https://script.google.com/macros/s/AKfycbw5o9hS6XShBfvASYILPGkyyJ3meapjh7SPL6liDEKq9etcri3f39GmrN7CkDwIm79S/exec',
-  GOOGLE_CLIENT_ID: '408822175136-pq5trb8589sldjmdandd4olvmh9mhdt6.apps.googleusercontent.com',
-  IMGBB_KEY: 'ce4eaccfa00df80ccefae51417e8bda4'
-};
-window.CONFIG = CONFIG;
-
-/* ===== STATE ===== */
-const state = { user:null, myProfile:null, profiles:[], selectedBrowseGender:'', searchQuery:'', isAdmin:false, currentConversationEmail:null, guideRequestId:null, adminCurrentRequest:null };
-window.state = state;
-const $ = id => document.getElementById(id);
-const show = id => $(id)?.classList.remove('hidden');
-const hide = id => $(id)?.classList.add('hidden');
-const esc = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-
-/* Toast */
-function toast(m, ok=true){
-  const n=document.createElement('div');
-  n.textContent=m;
-  n.style.cssText='position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:'+(ok?'#16a34a':'#e50914')+';color:#fff;padding:10px 18px;border-radius:12px;font-weight:800;z-index:9999;box-shadow:0 10px 30px rgba(0,0,0,.4)';
-  document.body.appendChild(n); setTimeout(()=>n.remove(), 2800);
-}
-
-/* Google auth */
-function decodeJwt(t){ try{ const p=t.split('.')[1].replace(/-/g,'+').replace(/_/g,'/'); return JSON.parse(decodeURIComponent(atob(p).split('').map(c=>'%'+('00'+c.charCodeAt(0).toString(16)).slice(-2)).join(''))) }catch(e){return null}}
-async function deriveActivationCode(email){ const d=new TextEncoder().encode('MATCHNEST::'+email.toLowerCase().trim()); const h=await crypto.subtle.digest('SHA-256',d); return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('').slice(0,8).toUpperCase() }
-const API = { async request(payload, timeoutMs=18000){
-  const url=new URL(CONFIG.API_URL);
-  Object.entries(payload).forEach(([k,v])=>{ if(v!==undefined&&v!==null) url.searchParams.append(k,String(v)) });
-  const ctrl = new AbortController();
-  const timer = setTimeout(()=>ctrl.abort(), timeoutMs);
-  try{
-    const r=await fetch(url.toString(),{method:'GET',redirect:'follow',signal:ctrl.signal,cache:'no-store'});
-    if(!r.ok) throw new Error('تعذر الاتصال بالخادم: '+r.status);
-    const j=await r.json();
-    if(j.status==='error') throw new Error(j.msg||'خطأ');
-    return j;
-  }catch(err){
-    if(err.name==='AbortError') throw new Error('الخادم تأخر في الرد. حاول مرة أخرى.');
-    throw err;
-  }finally{ clearTimeout(timer); }
-}};
-window.API = API;
-
-let _gsiAttempts = 0;
-function googleStatus(msg, color='#fbbf24'){
-  const el = $('login-status');
-  if(el){ el.textContent = msg; el.style.color = color; }
-}
-function googleErrorText(e){
-  const msg = String(e?.message || e || '').toLowerCase();
-  if(msg.includes('origin') || msg.includes('unauthorized') || msg.includes('not allowed')) return 'يجب إضافة هذا الدومين في Google OAuth: '+location.origin;
-  if(location.protocol !== 'https:' && location.hostname !== 'localhost') return 'تسجيل Google يحتاج HTTPS. افتح رابط Netlify النهائي.';
-  return 'تعذر تجهيز Google. جرّب تحديث الصفحة أو فتح الموقع من Chrome بدون مانع إعلانات.';
-}
-function initGoogle(){
-  const box = document.getElementById('g_id_signin');
-  if(!box) return;
-  if(!window.google?.accounts?.id){
-    if(_gsiAttempts++ < 60) return setTimeout(initGoogle,250);
-    return googleStatus('تعذر تحميل مكتبة Google. تحقق من الاتصال أو مانع الإعلانات.');
-  }
-  try{
-    google.accounts.id.initialize({client_id:CONFIG.GOOGLE_CLIENT_ID,callback:handleGoogleCredential,auto_select:false,cancel_on_tap_outside:true});
-    box.innerHTML='';
-    google.accounts.id.renderButton(box,{type:'standard',theme:'filled_black',size:'large',width:300});
-    googleStatus('', '#9ca3af');
-  }catch(e){
-    console.error('Google Sign-In error', e);
-    googleStatus(googleErrorText(e), '#f87171');
-  }
-}
-async function handleGoogleCredential(res){
-  const p=decodeJwt(res?.credential); if(!p?.email){ googleStatus('لم نستلم بيانات Google. حاول مرة أخرى.', '#f87171'); return; }
-  googleStatus('جاري تسجيل الدخول…');
-  const email=String(p.email).toLowerCase(), name=p.name||email.split('@')[0], picture=p.picture||'';
-  const code=await deriveActivationCode(email);
-  try{
-    const r=await API.request({action:'login',email,code});
-    if(r.profile){ state.user={email, name:r.profile.name||name, picture:r.profile.imageUrl||picture, activationCode:code}; sessionStorage.setItem('mn_user',JSON.stringify(state.user)); return enterApp(); }
-    if(r.status==='pending_approval' || r.status==='rejected'){ googleStatus(r.msg||'طلبك قيد مراجعة الموجه', '#fbbf24'); return; }
-  }catch(e){ console.warn('Login check failed; opening setup for new profile', e); }
-  state.user={email,name,picture,activationCode:code};
-  sessionStorage.setItem('mn_user',JSON.stringify(state.user));
-  openSetup();
-}
-function openSetup(){
-  document.getElementById('screen-login').classList.add('hidden');
-  document.getElementById('screen-setup').classList.remove('hidden');
-  $('setup-greeting').textContent='مرحباً، '+(state.user.name.split(' ')[0]||'');
-  $('f-name').value=state.user.name; $('f-email').value=state.user.email;
-}
-
-/* ===== ARABIC SMART SEARCH ===== */
-function arNormalize(s){
-  return String(s||'').toLowerCase()
-    .normalize('NFKD')
-    .replace(/[\u064B-\u065F\u0670\u06D6-\u06ED]/g,'')
-    .replace(/[أإآٱ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/ؤ/g,'و').replace(/ئ/g,'ي')
-    .replace(/[^a-z0-9\u0600-\u06FF\s]/g,' ')
-    .replace(/\s+/g,' ').trim();
-}
-// fuzzy: all terms must appear somewhere
-function searchScore(profile, terms){
-  if(!terms.length) return 1;
-  const hay = arNormalize([profile.name, profile.location, profile.birthCity, profile.specs, profile.gender, profile.age, profile.status, profile.height].join(' • '));
-  let score=0;
-  for(const t of terms){ if(hay.includes(t)) score+= t.length; else return 0; }
-  // boost name / location matches
-  if(arNormalize(profile.name).includes(terms[0])) score+=5;
-  if(arNormalize(profile.location).includes(terms[0])) score+=3;
-  return score;
-}
-function getFilteredProfiles(){
-  const q = arNormalize(state.searchQuery);
-  const terms = q ? q.split(' ').filter(Boolean) : [];
-  let list = state.profiles.filter(p=>{
-    if(state.selectedBrowseGender && p.gender !== state.selectedBrowseGender) return false;
-    if(!terms.length) return true;
-    return searchScore(p, terms) > 0;
-  });
-  if(terms.length){
-    list = list.map(p=>({...p, _s: searchScore(p, terms)})).sort((a,b)=> b._s - a._s);
-  }
-  return list;
-}
-function highlight(text, query){
-  if(!query) return esc(text);
-  const terms = arNormalize(query).split(' ').filter(t=>t.length>1);
-  let out = esc(text);
-  terms.forEach(t=>{
-    const re = new RegExp('('+t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
-    out = out.replace(re,'<mark class="hl">$1</mark>');
-  });
-  return out;
-}
-
-/* ===== RENDER CARDS ===== */
-function cardImage(p){ return p.imageUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(p.name||'User')}&background=E50914&color=fff&size=400`; }
-function nfCard(p, query=''){
-  const meta = p.isAdmin ? 'الموجه' : [p.age? p.age+' سنة':'', p.location||''].filter(Boolean).join(' • ');
-  const stars = p.isAdmin ? '' : `<div class="nf-stars">${'★'.repeat(Math.round(p.ratingAverage||0))}<span style="color:#9aa0a6"> ${(p.ratingAverage||0).toFixed(1)} • ${p.ratingCount||0}</span></div>`;
-  const badge = p.isAdmin ? 'ADMIN' : (p.gender==='أنثى'?'👩':'👨');
-  return `<div class="nf-card" data-email="${esc(p.email||'')}">
-    <div class="nf-poster" style="background-image:url('${esc(cardImage(p))}')">
-      <div class="nf-top-badge">${badge}</div>
-      <div class="nf-overlay">
-        <div class="nf-name">${highlight(p.name||'عضو', query)}</div>
-        <div class="nf-meta">${esc(meta)}</div>
-        ${stars}
+<main class="main">
+  <div>
+    <div class="player-wrap">
+      <div class="placeholder" id="placeholder">
+        <div>
+          <div class="ph-icon">📡</div>
+          <h2>اختر قناة من القائمة</h2>
+          <div style="margin-top:8px">37+ قناة beIN Sports • SSC • Dubai • Abu Dhabi • الرياضية</div>
+          <small style="color:var(--muted);display:block;margin-top:8px">
+            💡 ابدأ بـ <b style="color:var(--gold)">Arryadia HD</b> (تشتغل فوراً بلا إعداد) أو فعّل Worker لكل قنوات beIN
+          </small>
+        </div>
       </div>
-      <div class="nf-hover-actions">
-        <button class="nf-icon-btn open-detail-btn" data-email="${esc(p.email||'')}" title="عرض">👁️</button>
-        <button class="nf-icon-btn primary quick-action-btn" data-email="${esc(p.email||'')}" title="${p.isAdmin?'تحدث':'مهتم'}">${p.isAdmin?'💬':'❤️'}</button>
+      <video id="video" controls playsinline crossorigin="anonymous"></video>
+      <iframe id="iframePlayer" style="display:none;width:100%;height:100%;border:0;background:#000" allowfullscreen allow="autoplay; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="no-referrer"></iframe>
+      <div class="loading-overlay" id="loading">
+        <div class="spinner"></div>
+        <div>جاري التحميل...<br><small id="loadingMsg" style="opacity:.7"></small></div>
+      </div>
+      <div class="error-overlay" id="error">
+        <h3>⚠ فشل التشغيل</h3>
+        <div id="errorMsg" style="opacity:.85;max-width:520px"></div>
+        <button class="btn primary" onclick="document.getElementById('error').classList.remove('show')">إغلاق</button>
       </div>
     </div>
-  </div>`;
-}
-function renderProfiles(){
-  const grid=$('members-grid');
-  const q = state.searchQuery||'';
-  const list=getFilteredProfiles();
-  $('search-stats').textContent = list.length ? `عُثر على ${list.length} نتيجة${q?` لـ “${q}”`:''}` : 'لا نتائج';
-  if(!list.length){ grid.innerHTML=''; $('profiles-empty').classList.remove('hidden'); return; }
-  $('profiles-empty').classList.add('hidden');
-  // virtual: limit first 120 for performance, with “load more”
-  const showList = list.slice(0, 180);
-  grid.innerHTML = showList.map(p=>nfCard(p,q)).join('') + (list.length>180?`<div style="grid-column:1/-1;text-align:center;padding:12px"><button class="btn btn-soft" onclick="alert('يوجد ${list.length} نتيجة – استعمل البحث للتضييق')">عرض ${list.length-180} إضافية…</button></div>`:'');
-  // wire
-  grid.querySelectorAll('.open-detail-btn').forEach(b=> b.onclick = e=>{ e.stopPropagation(); const p=state.profiles.find(x=>x.email===b.dataset.email); if(p) openDetail(p)} );
-  grid.querySelectorAll('.quick-action-btn').forEach(b=> b.onclick = async e=>{ e.stopPropagation(); const p=state.profiles.find(x=>x.email===b.dataset.email); if(!p) return; if(p.isAdmin){ navigate('guide'); return;} try{ await API.request({action:'sendInterest',senderEmail:state.user.email,receiverEmail:p.email,activationCode:state.user.activationCode}); toast('تم إرسال طلب الاهتمام ✓')}catch(err){toast(err.message,false)} });
-  grid.querySelectorAll('.nf-card').forEach(c=> c.onclick = ()=>{ const p=state.profiles.find(x=>x.email===c.dataset.email); if(p) openDetail(p) });
+
+    <div class="np-bar">
+      <div class="np-top">
+        <span class="np-badge">PLAYING</span>
+        <div class="np-name" id="npName">— لم يتم اختيار قناة —</div>
+        <button class="btn" id="muteBtn">🔊</button>
+        <button class="btn" id="fsBtn">⛶ ملء الشاشة</button>
+        <button class="btn" id="reloadBtn">↻</button>
+      </div>
+      <div class="quality-pick" id="qualityWrap" style="display:none">
+        <span class="quality-lbl">🎚️ الجودة:</span>
+        <span id="qualityList" style="display:inline-flex;gap:5px;flex-wrap:wrap"></span>
+      </div>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="panel">
+      <h3>📺 القنوات</h3>
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-f="all">الكل</button>
+        <button class="tab" data-f="ar">🇸🇦 عربي</button>
+        <button class="tab" data-f="fr">🇫🇷 FR</button>
+        <button class="tab" data-f="en">🇬🇧 EN</button>
+        <button class="tab" data-f="tr">🇹🇷 TR</button>
+        <button class="tab" data-f="es">🇪🇸 ES</button>
+      </div>
+      <div class="ch-list" id="chList"></div>
+    </div>
+
+    <div class="panel">
+      <h3>📊 إحصائيات</h3>
+      <div class="row"><span>إجمالي القنوات</span><span id="chCount" style="color:var(--gold);font-weight:700">—</span></div>
+      <div class="row"><span>قنوات حرة (CORS)</span><span style="color:var(--green)">5</span></div>
+      <div class="row"><span>قنوات beIN عربي</span><span style="color:var(--bein-2);font-weight:700">12</span></div>
+      <div class="row"><span>قنوات beIN كلها</span><span style="color:var(--bein-2);font-weight:700">37</span></div>
+      <div class="row"><span>SSC + خليجي</span><span style="color:var(--ma-green);font-weight:700">16</span></div>
+    </div>
+  </aside>
+</main>
+
+<!-- Setup Modal -->
+<div class="modal-bg" id="setupModal">
+  <div class="modal" style="position:relative">
+    <button class="x" onclick="document.getElementById('setupModal').classList.remove('show')">✕</button>
+    <h2>🚀 إنشاء Worker (5 دقائق، مجاناً)</h2>
+    <p style="color:var(--muted);font-size:13px;line-height:1.7">قنوات beIN Arabic محمية بفحص <code>Referer</code> على السيرفر. لتشغيلها نحتاج وسيط بسيط على Cloudflare Workers (100 ألف طلب يومياً مجاناً).</p>
+    <ol>
+      <li>اذهب إلى <a href="https://dash.cloudflare.com/sign-up/workers-and-pages" target="_blank">workers.cloudflare.com</a> وأنشئ حساب مجاني</li>
+      <li>اضغط <b>Create</b> → <b>Hello World</b> → سمّه <code>tifotv-bein</code></li>
+      <li>اضغط <b>Edit Code</b> → احذف كل الكود الموجود</li>
+      <li>الصق محتوى ملف <code>worker.js</code> المرفق معك بالكامل</li>
+      <li>اضغط <b>Save and Deploy</b></li>
+      <li>انسخ رابط الـ worker الظاهر (مثل <code>https://tifotv-bein.user.workers.dev</code>) وضعه أعلاه</li>
+    </ol>
+    <p style="font-size:12px;color:var(--green);margin-top:8px">✓ بعدها ستعمل كل الـ 37 قناة beIN + SSC + Dubai تلقائياً!</p>
+    <p style="margin-top:14px;font-size:12px;color:var(--muted)">
+      محتوى worker.js موجود في مجلد المشروع.
+    </p>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+  ⚽ TifoTV •
+  <span style="color:var(--gold)">F</span> ملء الشاشة •
+  <span style="color:var(--gold)">M</span> صوت •
+  <span style="color:var(--gold)">/</span> بحث
+</footer>
+
+<script>
+// ============================================================
+// ============================================================
+// قنوات Streamed.pk عبر embed.st (iframe — تشتغل دائماً بدون Worker!)
+// ⭐ هذه الأفضل والأكثر استقراراً
+// ============================================================
+const STREAMED_CHANNELS = [
+  // مباريات اليوم/الغد (تتجدد تلقائياً)
+  { kind:"iframe", id:"morocco",  name:"🇲🇦 المغرب vs هولندا (beIN Arabic HD)", icon:"bein", t:"ماروك", lang:"ar", group:"matches", fav:true,
+    src:"https://embed.st/embed/admin/ppv-netherlands-vs-morocco/7" },
+  { kind:"iframe", id:"morocco-fox", name:"🇲🇦 المغرب vs هولندا (FOX EN)", icon:"bein", t:"FOX", lang:"en", group:"matches",
+    src:"https://embed.st/embed/admin/ppv-netherlands-vs-morocco/3" },
+  { kind:"iframe", id:"morocco-itv", name:"🇲🇦 المغرب vs هولندا (ITV EN)", icon:"bein", t:"ITV", lang:"en", group:"matches",
+    src:"https://embed.st/embed/admin/ppv-netherlands-vs-morocco/5" },
+  { kind:"iframe", id:"morocco-dazn", name:"🇲🇦 المغرب vs هولندا (DAZN ES)", icon:"bein", t:"DAZN", lang:"es", group:"matches",
+    src:"https://embed.st/embed/admin/ppv-netherlands-vs-morocco/9" },
+  { kind:"iframe", id:"brazil-jp", name:"🇧🇷 البرازيل vs اليابان (beIN Arabic)", icon:"bein", t:"BRA-JP", lang:"ar", group:"matches",
+    src:"https://embed.st/embed/admin/ppv-brazil-vs-japan/7" },
+  { kind:"iframe", id:"germany-pa", name:"🇩🇪 ألمانيا vs الباراغواي", icon:"bein", t:"GER-PA", lang:"ar", group:"matches",
+    src:"https://embed.st/embed/admin/ppv-germany-vs-paraguay/7" },
+  { kind:"iframe", id:"france-se", name:"🇫🇷 فرنسا vs السويد", icon:"bein", t:"FRA-SE", lang:"ar", group:"matches",
+    src:"https://embed.st/embed/admin/ppv-france-vs-sweden/7" },
+  { kind:"iframe", id:"ivory-no", name:"🇨🇮 ساحل العاج vs النرويج", icon:"bein", t:"CIV-NO", lang:"ar", group:"matches",
+    src:"https://embed.st/embed/admin/ppv-ivory-coast-vs-norway/7" },
+];
+
+// قنوات DaddyLive (تحتاج Worker — قد تتعطل أحياناً بسبب حجب Cloudflare لسيرفر التوزيع)
+// ============================================================
+const DLHD_CHANNELS = [
+  // ========== beIN Sports Arabic (MENA) - 12 قناة ==========
+  { id:91,  name:"beIN Sports 1 Arabic",  icon:"bein", t:"beIN 1", lang:"ar", group:"bein-ar", fav:true },
+  { id:92,  name:"beIN Sports 2 Arabic",  icon:"bein", t:"beIN 2", lang:"ar", group:"bein-ar" },
+  { id:93,  name:"beIN Sports 3 Arabic",  icon:"bein", t:"beIN 3", lang:"ar", group:"bein-ar" },
+  { id:94,  name:"beIN Sports 4 Arabic",  icon:"bein", t:"beIN 4", lang:"ar", group:"bein-ar" },
+  { id:95,  name:"beIN Sports 5 Arabic",  icon:"bein", t:"beIN 5", lang:"ar", group:"bein-ar" },
+  { id:96,  name:"beIN Sports 6 Arabic",  icon:"bein", t:"beIN 6", lang:"ar", group:"bein-ar" },
+  { id:97,  name:"beIN Sports 7 Arabic",  icon:"bein", t:"beIN 7", lang:"ar", group:"bein-ar" },
+  { id:98,  name:"beIN Sports 8 Arabic",  icon:"bein", t:"beIN 8", lang:"ar", group:"bein-ar" },
+  { id:99,  name:"beIN Sports 9 Arabic",  icon:"bein", t:"beIN 9", lang:"ar", group:"bein-ar" },
+  { id:100, name:"beIN Sports XTRA 1",    icon:"bein", t:"XTRA",   lang:"ar", group:"bein-ar" },
+  { id:597, name:"beIN Sports MAX AR",    icon:"bein", t:"MAX",    lang:"ar", group:"bein-ar" },
+  { id:578, name:"beIN Sports HD Qatar",  icon:"bein", t:"QAT",    lang:"ar", group:"bein-ar" },
+
+  // ========== beIN Sports MENA English ==========
+  { id:61, name:"beIN Sports MENA English 1", icon:"bein", t:"MENA1", lang:"en", group:"bein-en" },
+  { id:90, name:"beIN Sports MENA English 2", icon:"bein", t:"MENA2", lang:"en", group:"bein-en" },
+
+  // ========== beIN France ==========
+  { id:116, name:"beIN Sports 1 France",  icon:"fr",   t:"beIN 1", lang:"fr", group:"bein-fr" },
+  { id:117, name:"beIN Sports 2 France",  icon:"fr",   t:"beIN 2", lang:"fr", group:"bein-fr" },
+  { id:118, name:"beIN Sports 3 France",  icon:"fr",   t:"beIN 3", lang:"fr", group:"bein-fr" },
+  { id:494, name:"beIN MAX 4 France",     icon:"fr",   t:"MAX 4", lang:"fr", group:"bein-fr" },
+  { id:495, name:"beIN MAX 5 France",     icon:"fr",   t:"MAX 5", lang:"fr", group:"bein-fr" },
+  { id:496, name:"beIN MAX 6 France",     icon:"fr",   t:"MAX 6", lang:"fr", group:"bein-fr" },
+  { id:497, name:"beIN MAX 7 France",     icon:"fr",   t:"MAX 7", lang:"fr", group:"bein-fr" },
+  { id:498, name:"beIN MAX 8 France",     icon:"fr",   t:"MAX 8", lang:"fr", group:"bein-fr" },
+  { id:499, name:"beIN MAX 9 France",     icon:"fr",   t:"MAX 9", lang:"fr", group:"bein-fr" },
+  { id:500, name:"beIN MAX 10 France",    icon:"fr",   t:"MAX10", lang:"fr", group:"bein-fr" },
+
+  // ========== beIN Türkiye ==========
+  { id:62,   name:"beIN Sports 1 Türkiye", icon:"tr", t:"TR 1", lang:"tr", group:"bein-tr" },
+  { id:63,   name:"beIN Sports 2 Türkiye", icon:"tr", t:"TR 2", lang:"tr", group:"bein-tr" },
+  { id:64,   name:"beIN Sports 3 Türkiye", icon:"tr", t:"TR 3", lang:"tr", group:"bein-tr" },
+  { id:67,   name:"beIN Sports 4 Türkiye", icon:"tr", t:"TR 4", lang:"tr", group:"bein-tr" },
+  { id:1010, name:"beIN Sports 5 Türkiye", icon:"tr", t:"TR 5", lang:"tr", group:"bein-tr" },
+
+  // ========== beIN USA / Español / Australia / Malaysia ==========
+  { id:425, name:"beIN Sports USA",          icon:"usa", t:"USA",  lang:"en", group:"bein-int" },
+  { id:372, name:"beIN Sports en Español",   icon:"es",  t:"ESP",  lang:"es", group:"bein-int" },
+  { id:712, name:"beIN Sports 1 Malaysia",   icon:"bein", t:"MY 1", lang:"en", group:"bein-int" },
+  { id:713, name:"beIN Sports 2 Malaysia",   icon:"bein", t:"MY 2", lang:"en", group:"bein-int" },
+  { id:714, name:"beIN Sports 3 Malaysia",   icon:"bein", t:"MY 3", lang:"en", group:"bein-int" },
+
+  // ========== SSC ==========
+  { id:614, name:"SSC Sport 1",    icon:"ssc", t:"SSC 1", lang:"ar", group:"ar-sport" },
+  { id:615, name:"SSC Sport 2",    icon:"ssc", t:"SSC 2", lang:"ar", group:"ar-sport" },
+  { id:616, name:"SSC Sport 3",    icon:"ssc", t:"SSC 3", lang:"ar", group:"ar-sport" },
+  { id:617, name:"SSC Sport 4",    icon:"ssc", t:"SSC 4", lang:"ar", group:"ar-sport" },
+  { id:618, name:"SSC Sport 5",    icon:"ssc", t:"SSC 5", lang:"ar", group:"ar-sport" },
+  { id:619, name:"SSC Extra 1",    icon:"ssc", t:"X 1",   lang:"ar", group:"ar-sport" },
+  { id:620, name:"SSC Extra 2",    icon:"ssc", t:"X 2",   lang:"ar", group:"ar-sport" },
+  { id:621, name:"SSC Extra 3",    icon:"ssc", t:"X 3",   lang:"ar", group:"ar-sport" },
+
+  // ========== UAE ==========
+  { id:604, name:"Dubai Sports 1",         icon:"dubai", t:"DXB 1", lang:"ar", group:"ar-sport" },
+  { id:605, name:"Dubai Sports 2",         icon:"dubai", t:"DXB 2", lang:"ar", group:"ar-sport" },
+  { id:606, name:"Dubai Sports 3",         icon:"dubai", t:"DXB 3", lang:"ar", group:"ar-sport" },
+  { id:600, name:"Abu Dhabi Sports 1",     icon:"uae",   t:"AD 1",  lang:"ar", group:"ar-sport" },
+  { id:601, name:"Abu Dhabi Sports 2",     icon:"uae",   t:"AD 2",  lang:"ar", group:"ar-sport" },
+  { id:609, name:"Abu Dhabi Premium 1",    icon:"uae",   t:"AD P1", lang:"ar", group:"ar-sport" },
+  { id:610, name:"Abu Dhabi Premium 2",    icon:"uae",   t:"AD P2", lang:"ar", group:"ar-sport" },
+];
+
+// قنوات حرة 100% (CORS مفتوح، تشتغل بلا Worker)
+const FREE_CHANNELS = [
+  { id:"arryadia",     name:"Arryadia HD (الرياضية)", icon:"ar-ma", t:"الرياضية", lang:"ar", group:"free",
+    src:"https://snrtworker.kharazbelaid.workers.dev/?id=arryadia.m3u8", fav:true },
+  { id:"alaoula",      name:"Al Aoula HD (الأولى)", icon:"ar-ma", t:"الأولى", lang:"ar", group:"free",
+    src:"https://snrtworker.kharazbelaid.workers.dev/?id=alaoula.m3u8" },
+  { id:"almaghribia",  name:"Al Maghribia HD", icon:"ar-ma", t:"المغربية", lang:"ar", group:"free",
+    src:"https://snrtworker.kharazbelaid.workers.dev/?id=almaghribia.m3u8" },
+  { id:"tamazight",    name:"Tamazight HD", icon:"ar-ma", t:"تمازيغت", lang:"ar", group:"free",
+    src:"https://snrtworker.kharazbelaid.workers.dev/?id=tamazight.m3u8" },
+  { id:"bein-xtra-en", name:"beIN SPORTS XTRA HD", icon:"bein", t:"XTRA", lang:"en", group:"free",
+    src:"https://bein-xtra-bein.amagi.tv/playlist.m3u8" },
+  { id:"bein-xtra-es", name:"beIN Sports XTRA Español", icon:"bein", t:"XTRA ES", lang:"es", group:"free",
+    src:"https://dc1644a9jazgj.cloudfront.net/beIN_Sports_Xtra_Espanol.m3u8" },
+];
+
+const GROUPS = [
+  { id:"matches",  label:"🔥 المباريات المباشرة (مضمونة 100%)" },
+  { id:"free",     label:"🆓 قنوات حرة (تعمل فوراً)" },
+  { id:"bein-ar",  label:"⭐ beIN Sports Arabic — 12 قناة" },
+  { id:"bein-fr",  label:"🇫🇷 beIN Sports France — 10 قنوات" },
+  { id:"bein-en",  label:"🇬🇧 beIN MENA English" },
+  { id:"bein-tr",  label:"🇹🇷 beIN Türkiye — 5 قنوات" },
+  { id:"bein-int", label:"🌍 beIN International" },
+  { id:"ar-sport", label:"🇸🇦 SSC + Dubai + Abu Dhabi" },
+];
+
+// ============================================================
+// State
+// ============================================================
+const $ = (s) => document.querySelector(s);
+const video = $("#video");
+const placeholder = $("#placeholder");
+const loading = $("#loading");
+const errorBox = $("#error");
+let hls = null;
+let current = null;
+let query = "";
+let filter = "all";
+let workerUrl = localStorage.getItem("tifotv_worker") || "";
+let workerOk = false;
+
+// 🎯 AUTO-DETECT: لو الموقع مرفوع على Netlify، استخدم الـ Function الداخلية تلقائياً
+const isNetlify = location.hostname.endsWith(".netlify.app") ||
+                  location.hostname.endsWith(".netlify.live") ||
+                  // كذلك إذا كانت Netlify Function موجودة على نفس النطاق
+                  false;
+if (isNetlify && !workerUrl) {
+  workerUrl = location.origin + "/.netlify/functions/bein";
 }
 
-/* ===== APP FLOW ===== */
-async function fetchMyProfile(){
-  const r=await API.request({action:'login',email:state.user.email,code:state.user.activationCode});
-  state.myProfile=r.profile; state.isAdmin=!!r.profile.isAdmin;
-  $('nav-photo').src = state.myProfile.imageUrl || state.user.picture || 'https://ui-avatars.com/api/?name=U&background=333&color=fff';
-  $('nav-name').textContent = state.isAdmin ? 'الموجه' : (state.myProfile.name||state.user.name);
-  document.getElementById('nav-admin-link').style.display = state.isAdmin ? '' : 'none';
-}
-async function enterApp(){
-  document.getElementById('screen-login').classList.add('hidden');
-  document.getElementById('screen-setup').classList.add('hidden');
-  document.getElementById('screen-app').classList.remove('hidden');
-  await fetchMyProfile();
-  await loadProfiles();
-  navigate(state.isAdmin ? 'admin' : 'home');
-}
-async function loadProfiles(){ const r=await API.request({action:'list'}); state.profiles = Array.isArray(r.profiles)?r.profiles:[]; renderProfiles(); }
+// Init worker UI
+if (workerUrl) $("#workerUrl").value = workerUrl;
+testWorker();
 
-function navigate(v){
-  ['view-home','view-requests','view-guide','view-conversations','view-admin','view-profile'].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.add('hidden') });
-  const map={home:'view-home',requests:'view-requests',guide:'view-guide',conversations:'view-conversations',admin:'view-admin',profile:'view-profile'};
-  if(map[v]) document.getElementById(map[v]).classList.remove('hidden');
-  document.querySelectorAll('.nav-link').forEach(n=> n.classList.toggle('active', n.dataset.nav===v));
-  if(v==='requests') loadRequests();
-  if(v==='guide') loadGuide();
-  if(v==='conversations') loadConversations();
-  if(v==='admin') loadAdmin();
-  if(v==='profile') renderMyProfile();
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-/* detail */
-function openDetail(p){
-  const dp=document.getElementById('detail-page');
-  $('detail-name').textContent = p.isAdmin ? 'الموجه' : p.name + (p.age? '، '+p.age:'');
-  $('detail-meta').textContent = p.isAdmin ? 'ADMIN' : (p.gender||'');
-  document.getElementById('detail-hero').style.backgroundImage = `url('${cardImage(p)}')`;
-  ['detail-location','detail-birth','detail-height','detail-status'].forEach((id,i)=>{
-    const vals=[p.location||'-', p.birthCity||'-', p.height||'-', p.status||'-'];
-    const el=document.getElementById(id); if(el) el.textContent = vals[i];
-  });
-  document.getElementById('detail-specs-full').textContent = p.specs || 'لم يكتب نبذة بعد.';
-  $('detail-rating-line').textContent = p.isAdmin ? '' : `التقييم: ${(p.ratingAverage||0).toFixed(1)} ★ (${p.ratingCount||0})`;
-  const ib=$('detail-interest-btn');
-  ib.textContent = p.isAdmin ? '📨 طلب التحدث' : '❤️ مهتم';
-  ib.onclick = async ()=>{
-    try{
-      if(p.isAdmin){ await API.request({action:'requestAdminChat',email:state.user.email,code:state.user.activationCode}); toast('تم إرسال طلب للموجه ✓'); navigate('guide'); closeDetail(); return }
-      await API.request({action:'sendInterest',senderEmail:state.user.email,receiverEmail:p.email,activationCode:state.user.activationCode});
-      toast('تم إرسال طلب الاهتمام ✓');
-    }catch(e){ toast(e.message,false) }
-  };
-  dp.style.transform='translateY(0)';
-}
-function closeDetail(){ document.getElementById('detail-page').style.transform='translateY(105%)' }
-$('detail-close').onclick = closeDetail;
-
-/* requests */
-async function loadRequests(){
-  try{
-    const r=await API.request({action:'getMyRequests',email:state.user.email,code:state.user.activationCode});
-    $('incoming-count').textContent=r.incoming.length;
-    $('outgoing-count').textContent=r.outgoing.length;
-    $('incoming-requests').innerHTML = r.incoming.map(x=>`<div style="padding:10px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;gap:8px"><div><b>${esc(x.senderProfile?.name||x.senderEmail)}</b><div class="small">${esc(x.senderProfile?.location||'')}</div></div><div>${x.status==='pending'?`<button class="btn btn-success btn-sm" onclick="respondReq('${x.requestId}','accepted')">قبول</button> <button class="btn btn-danger btn-sm" onclick="respondReq('${x.requestId}','rejected')">رفض</button>`:`<span class="status ${x.status}">${x.status}</span>`}</div></div>`).join('') || '<p class="small">لا توجد طلبات واردة</p>';
-    $('outgoing-requests').innerHTML = r.outgoing.map(x=>`<div style="padding:10px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px"><b>${esc(x.receiverProfile?.name||x.receiverEmail)}</b> – <span class="status ${x.status}">${x.status}</span><div class="small">محاولات متبقية: ${x.remainingAttempts}</div></div>`).join('') || '<p class="small">لا توجد طلبات مرسلة</p>';
-  }catch(e){ toast(e.message,false) }
-}
-window.respondReq = async (id,resp)=>{ try{ await API.request({action:'respondInterest',requestId:id,email:state.user.email,code:state.user.activationCode,responseStatus:resp}); toast(resp==='accepted'?'تم القبول ✓':'تم الرفض'); loadRequests(); }catch(e){ toast(e.message,false)} }
-
-/* guide */
-async function loadGuide(){
-  try{
-    const s=await API.request({action:'getAdminChatStatus',email:state.user.email,code:state.user.activationCode});
-    state.guideRequestId = s.requestId||null;
-    const btn=$('guide-request-btn'), st=$('guide-request-status'), wrap=$('guide-chat-wrapper'), rem=$('guide-remaining-box');
-    if(s.requestStatus==='opened' && s.requestId){
-      btn.disabled=true; st.classList.add('hidden'); wrap.classList.remove('hidden'); rem.classList.remove('hidden'); rem.textContent='الرسائل المتبقية: '+(s.remainingUserMessages??5); rem.className='status '+(s.remainingUserMessages>0?'accepted':'rejected');
-      const chat=await API.request({action:'getAdminChatMessages',email:state.user.email,code:state.user.activationCode,requestId:s.requestId});
-      renderChat('guide-messages', chat.messages||[], 'user');
-    } else if(s.requestStatus==='pending'){
-      btn.disabled=true; st.classList.remove('hidden'); wrap.classList.add('hidden');
-    } else {
-      btn.disabled=false; st.classList.add('hidden'); wrap.classList.add('hidden');
-    }
-  }catch(e){ /* ignore */ }
-}
-function renderChat(boxId, msgs, meType='senderEmail'){
-  const box=$(boxId); if(!box) return;
-  if(!msgs.length){ box.innerHTML='<p class="small">لا توجد رسائل بعد.</p>'; return }
-  box.innerHTML = msgs.map(m=>{
-    const isMe = meType==='user' ? m.senderType==='user' : m.senderEmail===state.user.email;
-    return `<div class="message ${isMe?'me':'them'}">${esc(m.messageText)}<small>${esc(m.createdAt||'')}</small></div>`;
-  }).join('');
-  box.scrollTop = box.scrollHeight;
-}
-
-/* conversations */
-async function loadConversations(){
-  try{
-    const r=await API.request({action:'getConversations',email:state.user.email,code:state.user.activationCode});
-    const list=r.conversations||[];
-    $('conversations-list').innerHTML = list.length ? list.map(c=>`<div style="padding:10px;border-bottom:1px solid var(--line);cursor:pointer" onclick="openConv('${c.otherEmail}')"><b>${esc(c.otherProfile?.name||c.otherEmail)}</b><div class="small">${esc((c.lastMessage||'').slice(0,60))}</div></div>`).join('') : '<p class="small">لا توجد محادثات بعد</p>';
-  }catch(e){ $('conversations-list').innerHTML='<p class="small" style="color:#f87171">تعذر التحميل</p>'}
-}
-window.openConv = async (email)=>{
-  state.currentConversationEmail=email;
-  $('conversation-title').textContent=email;
-  try{
-    const r=await API.request({action:'getMessages',email:state.user.email,code:state.user.activationCode,otherEmail:email});
-    renderChat('conversation-messages', r.messages||[], 'senderEmail');
-  }catch(e){ toast(e.message,false) }
-}
-
-/* profile */
-function renderMyProfile(){
-  const p=state.myProfile||{};
-  ['me-name-input','me-age','me-gender','me-location','me-birthCity','me-height','me-status','me-specs'].forEach(id=>{
-    const el=document.getElementById(id); if(!el) return;
-    const map={ 'me-name-input':p.name, 'me-age':p.age, 'me-gender':p.gender, 'me-location':p.location, 'me-birthCity':p.birthCity, 'me-height':p.height, 'me-status':p.status, 'me-specs':p.specs };
-    el.value = map[id]||'';
-    el.disabled = !!p.isAdmin;
-  });
-}
-
-/* admin */
-async function loadAdmin(){
-  if(!state.isAdmin) return;
-  try{
-    const d=await API.request({action:'adminDashboard',email:state.user.email,code:state.user.activationCode});
-    $('admin-total-profiles').textContent=d.totals.profiles;
-    $('admin-total-requests').textContent=d.totals.requests;
-    $('admin-total-guide-requests').textContent=d.totals.adminChatRequests;
-    $('admin-total-pending-approvals').textContent=d.totals.pendingRegistrationRequests;
-    $('admin-total-messages').textContent=(d.totals.memberMessages||0)+(d.totals.adminMessages||0);
-    // reg requests
-    $('admin-registration-requests').innerHTML = (d.registrationRequests||[]).map(r=>`<div style="padding:10px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px"><b>${esc(r.name)}</b> – ${esc(r.email)}<br><span class="small">${esc(r.location||'')} • ${esc(r.age||'') } سنة</span><div style="margin-top:6px"><button class="btn btn-success btn-sm" onclick="reviewReg('${r.requestId}','approved')">موافقة</button> <button class="btn btn-danger btn-sm" onclick="reviewReg('${r.requestId}','rejected')">رفض</button></div></div>`).join('') || '<p class="small">لا توجد طلبات</p>';
-    // users
-    const users = state.profiles.filter(u=>!u.isAdmin);
-    $('admin-users-list').innerHTML = users.map(u=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:8px;border-bottom:1px solid var(--line)"><span>${esc(u.name)} – <span class="small">${esc(u.email)}</span></span><button class="btn btn-danger btn-sm" onclick="adminDel('${u.email}')">حذف</button></div>`).join('') || '—';
-    // guide requests
-    const gr = await API.request({action:'adminGetChatRequests',email:state.user.email,code:state.user.activationCode});
-    $('admin-guide-requests').innerHTML = (gr.requests||[]).map(x=>`<div style="padding:8px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center"><div><b>${esc(x.userProfile?.name||x.userEmail)}</b><div class="small">رسائل متبقية: ${x.remainingUserMessages} • ${x.requestStatus}</div></div><div><button class="btn btn-success btn-sm" onclick="adminOpen('${x.requestId}')">فتح</button> <button class="btn btn-soft btn-sm" onclick="adminRead('${x.requestId}')">عرض</button></div></div>`).join('')||'<p class="small">لا توجد طلبات</p>';
-    document.getElementById('admin-chat-requests-list').innerHTML = document.getElementById('admin-guide-requests').innerHTML;
-  }catch(e){ toast(e.message,false) }
-}
-window.reviewReg = async (id,dec)=>{ try{ await API.request({action:'adminReviewRegistrationRequest',email:state.user.email,code:state.user.activationCode,requestId:id,decision:dec}); toast(dec==='approved'?'تمت الموافقة ✓':'تم الرفض'); loadAdmin(); loadProfiles(); }catch(e){ toast(e.message,false)} }
-window.adminDel = async (email)=>{ if(!confirm('حذف '+email+' ؟')) return; try{ await API.request({action:'adminDeleteUser',email:state.user.email,code:state.user.activationCode,targetEmail:email}); toast('تم الحذف'); loadProfiles(); loadAdmin(); }catch(e){ toast(e.message,false)} }
-window.adminOpen = async (id)=>{ try{ await API.request({action:'adminOpenChatRequest',email:state.user.email,code:state.user.activationCode,requestId:id}); toast('تم الفتح'); adminRead(id); }catch(e){ toast(e.message,false)} }
-window.adminRead = async (id)=>{ state.adminCurrentRequest=id; $('admin-conversation-title').textContent='محادثة #'+id.slice(-6); const r=await API.request({action:'getAdminChatMessages',email:state.user.email,code:state.user.activationCode,requestId:id}); const box=$('admin-conversation-messages'); box.innerHTML = (r.messages||[]).map(m=>`<div class="message ${m.senderType==='admin'?'me':'them'}">${esc(m.messageText)}<small>${esc(m.createdAt||'')}</small></div>`).join('') || '<p class="small">لا رسائل</p>'; box.scrollTop=box.scrollHeight; }
-
-/* ===== EVENTS ===== */
-document.addEventListener('DOMContentLoaded', ()=>{
-  $('year').textContent = new Date().getFullYear();
-  initGoogle();
-  const cached = sessionStorage.getItem('mn_user');
-  if(cached){ try{ state.user=JSON.parse(cached); enterApp(); }catch(e){ sessionStorage.removeItem('mn_user') } }
-
-  // search – robust arabic
-  let tmr;
-  const qInput=$('q');
-  if(qInput){
-    const run = ()=>{ state.searchQuery = qInput.value; clearTimeout(tmr); tmr=setTimeout(renderProfiles, 120) };
-    ['input','keyup','change'].forEach(ev=> qInput.addEventListener(ev, run));
+async function testWorker(){
+  if (!workerUrl){
+    $("#workerStatus").innerHTML = '⚠ بدون Worker، فقط القنوات الحرة تعمل — <b>أو ارفع المشروع على Netlify (تلقائي تماماً!)</b>';
+    $("#workerBar").classList.remove("ok");
+    workerOk = false;
+    return;
   }
-  document.getElementById('btn-clear-search')?.addEventListener('click', ()=>{ $('q').value=''; state.searchQuery=''; renderProfiles(); });
-  document.querySelectorAll('[data-filter-gender]').forEach(b=> b.addEventListener('click', ()=>{
-    document.querySelectorAll('[data-filter-gender]').forEach(x=>x.classList.remove('active'));
-    b.classList.add('active');
-    state.selectedBrowseGender = b.dataset.filterGender==='all' ? '' : b.dataset.filterGender;
-    renderProfiles();
-  }));
+  try {
+    $("#workerStatus").textContent = "⏳ جاري الاختبار...";
+    // Support both Cloudflare Worker (?id=) and Netlify Function paths
+    const sep = workerUrl.includes("?") ? "&" : "?";
+    const r = await fetch(workerUrl + sep + "id=91&json=1", { cache: "no-store" });
+    const j = await r.json();
+    if (j.m3u8){
+      workerOk = true;
+      $("#workerBar").classList.add("ok");
+      const env = isNetlify ? "Netlify Function" : "Worker";
+      $("#workerStatus").innerHTML = `✓ ${env} يعمل — كل قنوات beIN جاهزة`;
+      $("#saveWorker").classList.add("ok");
+      $("#saveWorker").textContent = "✓ متصل";
+    } else throw new Error("No m3u8");
+  } catch(e){
+    workerOk = false;
+    $("#workerBar").classList.remove("ok");
+    $("#workerStatus").innerHTML = '❌ Worker لا يستجيب — تحقق من الرابط';
+  }
+  render();
+}
 
-  // nav
-  document.querySelectorAll('.nav-link').forEach(n=> n.addEventListener('click', ()=> navigate(n.dataset.nav)));
-  document.getElementById('btn-logout')?.addEventListener('click', ()=>{ sessionStorage.removeItem('mn_user'); location.reload(); });
-
-  // register form
-  document.getElementById('profile-form')?.addEventListener('submit', async e=>{
-    e.preventDefault();
-    const err=$('setup-error'); err.style.display='none';
-    $('btn-save-label').textContent='جاري الحفظ…'; document.getElementById('btn-save-spinner').classList.remove('hidden');
-    try{
-      const payload={ name:$('f-name').value.trim(), age:$('f-age').value, gender:$('f-gender').value, status:$('f-status').value, location:$('f-location').value.trim(), birthCity:$('f-birthCity').value.trim(), height:$('f-height').value, specs:$('f-specs').value.trim(), imageUrl: window._pendingImg || state.user.picture || '' };
-      const res=await API.request({action:'register', email:state.user.email, activationCode:state.user.activationCode, ...payload});
-      if(res.status==='pending_approval'){ alert(res.msg||'بانتظار موافقة الموجه'); sessionStorage.removeItem('mn_user'); location.reload(); return }
-      toast('مرحباً بك! 🎉'); await enterApp();
-    }catch(ex){ err.textContent=ex.message; err.style.display='block'; }
-    finally{ $('btn-save-label').textContent='حفظ ودخول المنصة'; document.getElementById('btn-save-spinner').classList.add('hidden'); }
-  });
-
-  // image upload
-  document.getElementById('img-file')?.addEventListener('change', async e=>{
-    const f=e.target.files[0]; if(!f) return;
-    $('img-status').textContent='جاري الرفع…';
-    try{
-      const b64 = await new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(r.result.split(',')[1]); r.onerror=rej; r.readAsDataURL(f) });
-      const fd=new FormData(); fd.append('key', CONFIG.IMGBB_KEY); fd.append('image', b64);
-      const up=await fetch('https://api.imgbb.com/1/upload',{method:'POST',body:fd}).then(x=>x.json());
-      if(!up.success) throw new Error('فشل الرفع');
-      window._pendingImg = up.data.display_url || up.data.url;
-      $('img-preview').src = window._pendingImg;
-      $('img-status').textContent='✓ تم الرفع';
-    }catch(ex){ $('img-status').textContent='✗ '+ex.message }
-  });
-
-  // me form
-  document.getElementById('me-form')?.addEventListener('submit', async e=>{
-    e.preventDefault();
-    try{
-      const payload={ name:document.getElementById('me-name-input').value, age:document.getElementById('me-age').value, gender:document.getElementById('me-gender').value, location:document.getElementById('me-location').value, birthCity:document.getElementById('me-birthCity').value, height:document.getElementById('me-height').value, status:document.getElementById('me-status').value, specs:document.getElementById('me-specs').value, imageUrl: state.myProfile?.imageUrl||'' };
-      await API.request({action:'update', activationCode: state.user.activationCode, ...payload});
-      document.getElementById('me-ok').style.display='inline'; setTimeout(()=>document.getElementById('me-ok').style.display='none',2000);
-      await fetchMyProfile(); loadProfiles();
-    }catch(ex){ const er=document.getElementById('me-error'); er.textContent=ex.message; er.style.display='inline'; setTimeout(()=>er.style.display='none',3000) }
-  });
-  document.getElementById('btn-me-delete')?.addEventListener('click', async ()=>{
-    if(!confirm('حذف الحساب نهائياً؟')) return;
-    try{ await API.request({action:'delete', activationCode: state.user.activationCode}); toast('تم الحذف'); sessionStorage.removeItem('mn_user'); setTimeout(()=>location.reload(),900) }catch(e){ toast(e.message,false) }
-  });
-
-  // guide send
-  document.getElementById('guide-request-btn')?.addEventListener('click', async ()=>{
-    try{ await API.request({action:'requestAdminChat',email:state.user.email,code:state.user.activationCode}); toast('تم إرسال طلب للموجه ✓'); loadGuide(); }catch(e){ toast(e.message,false) }
-  });
-  document.getElementById('guide-send-btn')?.addEventListener('click', async ()=>{
-    const txt=$('guide-message-input').value.trim(); if(!txt||!state.guideRequestId) return;
-    try{ await API.request({action:'sendAdminChatMessage',email:state.user.email,code:state.user.activationCode,requestId:state.guideRequestId,messageText:txt}); $('guide-message-input').value=''; loadGuide(); }catch(e){ toast(e.message,false) }
-  });
-
-  // conversation send
-  document.getElementById('conversation-send-btn')?.addEventListener('click', async ()=>{
-    const txt=$('conversation-input').value.trim(); if(!txt||!state.currentConversationEmail) return toast('اختر محادثة',false);
-    try{ await API.request({action:'sendMessage',senderEmail:state.user.email,receiverEmail:state.currentConversationEmail,code:state.user.activationCode,messageText:txt}); $('conversation-input').value=''; openConv(state.currentConversationEmail); }catch(e){ toast(e.message,false) }
-  });
-
-  // admin send
-  document.getElementById('admin-send-btn')?.addEventListener('click', async ()=>{
-    const txt=$('admin-message-input').value.trim(); if(!txt||!state.adminCurrentRequest) return;
-    try{ await API.request({action:'sendAdminChatMessage',email:state.user.email,code:state.user.activationCode,requestId:state.adminCurrentRequest,messageText:txt}); $('admin-message-input').value=''; adminRead(state.adminCurrentRequest); }catch(e){ toast(e.message,false) }
-  });
+$("#saveWorker").addEventListener("click", () => {
+  const v = $("#workerUrl").value.trim().replace(/\/$/, "");
+  workerUrl = v;
+  localStorage.setItem("tifotv_worker", v);
+  testWorker();
 });
+
+$("#setupHelp").addEventListener("click", e => {
+  e.preventDefault();
+  $("#setupModal").classList.add("show");
+});
+
+// ============================================================
+// Render channels
+// ============================================================
+function render(){
+  const list = $("#chList");
+  list.innerHTML = "";
+  let total = 0;
+
+  const allChannels = [
+    ...STREAMED_CHANNELS,  // already has kind:"iframe"
+    ...FREE_CHANNELS.map(c => ({...c, kind:"free"})),
+    ...DLHD_CHANNELS.map(c => ({...c, kind:"dlhd"})),
+  ];
+
+  for (const g of GROUPS){
+    const items = allChannels.filter(c => {
+      if (c.group !== g.id) return false;
+      if (filter !== "all" && c.lang !== filter) return false;
+      if (query){
+        const q = query.toLowerCase();
+        if (!c.name.toLowerCase().includes(q) && !(c.t||"").toLowerCase().includes(q)) return false;
+      }
+      return true;
+    });
+    if (!items.length) continue;
+    const title = document.createElement("div");
+    title.className = "section-title";
+    title.innerHTML = `<span>${g.label}</span>`;
+    list.appendChild(title);
+    for (const c of items){
+      total++;
+      const disabled = c.kind === "dlhd" && !workerOk;
+      const el = document.createElement("div");
+      el.className = "ch" + (current && current.id === c.id ? " active" : "") + (disabled ? " disabled" : "");
+      el.title = disabled ? "تحتاج Worker — فعّله من الأعلى" : "";
+      el.innerHTML = `
+        <div class="ch-icon ${c.icon}">${c.t}</div>
+        <div class="ch-info">
+          <div class="ch-name">${c.name} ${c.fav?'⭐':''}</div>
+          <div class="ch-meta">
+            ${c.lang==="ar"?'<span class="tag ar">عربي</span>':''}
+            ${c.lang==="en"?'<span class="tag en">EN</span>':''}
+            ${c.lang==="fr"?'<span class="tag fr">FR</span>':''}
+            ${c.lang==="tr"?'<span class="tag tr">TR</span>':''}
+            ${c.lang==="es"?'<span class="tag es">ES</span>':''}
+            <span class="tag live">LIVE</span>
+            ${c.kind==="free"?'<span class="tag cors">CORS ✓</span>':
+              c.kind==="iframe"?'<span class="tag cors">مباشر ✓</span>':
+              '<span class="tag wrk">Worker</span>'}
+          </div>
+        </div>
+      `;
+      el.addEventListener("click", () => {
+        if (disabled){
+          toast('⚠ هذه القناة تحتاج Worker — فعّله من الأعلى');
+          return;
+        }
+        play(c);
+      });
+      list.appendChild(el);
+    }
+  }
+  $("#chCount").textContent = total + " ظاهرة";
+}
+
+// ============================================================
+// Play
+// ============================================================
+function play(c){
+  current = c;
+  placeholder.classList.add("hide");
+  errorBox.classList.remove("show");
+  loading.classList.add("show");
+  $("#loadingMsg").textContent = c.name;
+  $("#qualityWrap").style.display = "none";
+  const kindLabel = c.kind === "free" ? "حر / CORS" : c.kind === "iframe" ? "بث مباشر" : "عبر Worker";
+  $("#npName").innerHTML = `${c.name} <small>${kindLabel}</small>`;
+  render();
+  toast(`▶ ${c.name}`);
+
+  if (hls){ hls.destroy(); hls = null; }
+  video.pause();
+  video.removeAttribute("src");
+  video.load();
+
+  // ===== IFRAME mode (embed.st live matches) =====
+  if (c.kind === "iframe") {
+    video.style.display = "none";
+    const ifr = $("#iframePlayer");
+    ifr.style.display = "block";
+    ifr.src = c.src;
+    setTimeout(() => loading.classList.remove("show"), 1500);
+    return;
+  }
+
+  // ===== Otherwise use HLS.js =====
+  video.style.display = "block";
+  $("#iframePlayer").style.display = "none";
+  $("#iframePlayer").src = "about:blank";
+
+  // Build URL — handle both Cloudflare Worker & Netlify Function paths
+  let src;
+  if (c.kind === "free") {
+    src = c.src;
+  } else {
+    const sep = workerUrl.includes("?") ? "&" : "?";
+    src = workerUrl + sep + "id=" + c.id;
+  }
+
+  if (Hls.isSupported()){
+    hls = new Hls({
+      lowLatencyMode: true,
+      enableWorker: true,
+      maxBufferLength: 12,
+      liveSyncDurationCount: 3,
+      manifestLoadingTimeOut: 12000,
+      manifestLoadingMaxRetry: 2,
+    });
+    hls.loadSource(src);
+    hls.attachMedia(video);
+    hls.on(Hls.Events.MANIFEST_PARSED, (e, data) => {
+      loading.classList.remove("show");
+      video.play().catch(()=>{
+        video.muted = true;
+        video.play().catch(()=>{});
+        $("#muteBtn").textContent = "🔇";
+      });
+      if (data.levels && data.levels.length > 1){
+        const wrap = $("#qualityList");
+        wrap.innerHTML = "";
+        const auto = document.createElement("button");
+        auto.className = "q-btn active";
+        auto.textContent = "Auto";
+        auto.addEventListener("click", () => { hls.currentLevel = -1; setActive(auto); });
+        wrap.appendChild(auto);
+        data.levels.forEach((lv, idx) => {
+          const b = document.createElement("button");
+          b.className = "q-btn";
+          b.textContent = lv.height ? lv.height + "p" : Math.round(lv.bitrate/1000) + "k";
+          b.addEventListener("click", () => { hls.currentLevel = idx; setActive(b); });
+          wrap.appendChild(b);
+        });
+        $("#qualityWrap").style.display = "flex";
+      }
+    });
+    hls.on(Hls.Events.ERROR, (e, data) => {
+      if (!data.fatal) return;
+      loading.classList.remove("show");
+      errorBox.classList.add("show");
+      let msg = `<p>السبب: <code style="background:rgba(255,255,255,.06);padding:2px 6px;border-radius:4px">${data.type} / ${data.details}</code></p>`;
+      if (c.kind === "dlhd") {
+        msg += '<p style="margin-top:8px;font-size:13px">تأكد من أن رابط Worker صحيح وأنه مُفعَّل. جرّب اختباره من شريط الأعلى.</p>';
+      } else {
+        msg += '<p style="margin-top:8px;font-size:13px">قد تكون القناة محجوبة جغرافياً. جرّب قناة أخرى.</p>';
+      }
+      $("#errorMsg").innerHTML = msg;
+    });
+  } else if (video.canPlayType("application/vnd.apple.mpegurl")){
+    video.src = src;
+    video.addEventListener("loadedmetadata", () => {
+      loading.classList.remove("show");
+      video.play().catch(()=>{ video.muted = true; video.play(); });
+    });
+  } else {
+    loading.classList.remove("show");
+    errorBox.classList.add("show");
+    $("#errorMsg").textContent = "متصفحك لا يدعم HLS.";
+  }
+}
+
+function setActive(btn){
+  document.querySelectorAll(".q-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+}
+
+// ============================================================
+// UI controls
+// ============================================================
+document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => {
+  document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
+  t.classList.add("active");
+  filter = t.dataset.f;
+  render();
+}));
+
+$("#search").addEventListener("input", e => { query = e.target.value.trim(); render(); });
+$("#muteBtn").addEventListener("click", () => {
+  video.muted = !video.muted;
+  $("#muteBtn").textContent = video.muted ? "🔇" : "🔊";
+});
+$("#fsBtn").addEventListener("click", () => {
+  const el = $(".player-wrap");
+  if (document.fullscreenElement) document.exitFullscreen();
+  else el.requestFullscreen?.();
+});
+$("#reloadBtn").addEventListener("click", () => {
+  if (!current){ toast("اختر قناة"); return; }
+  play(current);
+});
+video.addEventListener("volumechange", () => {
+  $("#muteBtn").textContent = video.muted ? "🔇" : "🔊";
+});
+
+// Countdown
+const KICKOFF = new Date("2026-06-29T21:00:00Z").getTime();
+function tick(){
+  let diff = KICKOFF - Date.now();
+  if (diff <= 0){
+    $("#countdown").innerHTML = '<div class="cd-box" style="min-width:auto;padding:8px 18px"><div class="cd-num" style="color:var(--live)">🔴 مباشرة</div></div>';
+    return;
+  }
+  const d = Math.floor(diff/86400000); diff -= d*86400000;
+  const h = Math.floor(diff/3600000);  diff -= h*3600000;
+  const m = Math.floor(diff/60000);    diff -= m*60000;
+  const s = Math.floor(diff/1000);
+  $("#cdD").textContent = String(d).padStart(2,"0");
+  $("#cdH").textContent = String(h).padStart(2,"0");
+  $("#cdM").textContent = String(m).padStart(2,"0");
+  $("#cdS").textContent = String(s).padStart(2,"0");
+}
+setInterval(tick, 1000); tick();
+
+let toastT;
+function toast(html){
+  const t = $("#toast"); t.innerHTML = html; t.classList.add("show");
+  clearTimeout(toastT); toastT = setTimeout(()=> t.classList.remove("show"), 3500);
+}
+
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "INPUT") return;
+  if (e.key === "/"){ e.preventDefault(); $("#search").focus(); }
+  if (e.key.toLowerCase() === "f") $("#fsBtn").click();
+  if (e.key.toLowerCase() === "m") $("#muteBtn").click();
+  if (e.key.toLowerCase() === "r") $("#reloadBtn").click();
+});
+
+render();
+setTimeout(()=> {
+  if (!workerUrl) {
+    toast('💡 جرّب <b>Arryadia HD ⭐</b> بدون إعداد، أو فعّل <b>Worker</b> لكل قنوات beIN');
+  } else {
+    toast('✨ ابدأ بـ <b>beIN Sports 1 Arabic ⭐</b>');
+  }
+}, 1000);
 </script>
 </body>
 </html>

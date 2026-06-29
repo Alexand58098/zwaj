@@ -1,0 +1,7 @@
+{
+  "name": "tifotv",
+  "version": "2.0.0",
+  "description": "Live sports streaming aggregator",
+  "private": true,
+  "dependencies": {}
+}
