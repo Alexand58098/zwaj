@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="preconnect" href="https://accounts.google.com">
+<link rel="preconnect" href="https://script.google.com">
+<link rel="dns-prefetch" href="https://images.unsplash.com">
+<title>الزواج المغربي — منصة راقية وآمنة للتعارف الجاد من أجل الزواج</title>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060608;--card:#101014;--soft:#18181f;--muted:#9ca3af;--line:rgba(255,255,255,.09);--accent:#e50914;--green:#16a34a;--red:#dc2626;--blue:#2563eb;--yellow:#f59e0b;--text:#fff}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--text);font-family:'Cairo',sans-serif}
+body{background:radial-gradient(1200px 600px at 85% -10%, rgba(229,9,20,.10), transparent), radial-gradient(900px 500px at 5% 110%, rgba(229,9,20,.06), transparent), #060608}
+.hidden{display:none!important}
+a{color:inherit;text-decoration:none}
+
+/* NAV -  top bar */
+.navbar{position:sticky;top:0;z-index:90;background:linear-gradient(180deg,rgba(0,0,0,.92),rgba(0,0,0,.65) 60%, transparent);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav-inner{max-width:1500px;margin:0 auto;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-weight:900;font-size:1.4rem;color:var(--accent);letter-spacing:-.3px;cursor:pointer}
+.nav-links{display:flex;gap:20px;flex-wrap:wrap;font-weight:800;font-size:.92rem;color:#cfcfd6}
+.nav-link{cursor:pointer;opacity:.9}.nav-link.active,.nav-link:hover{color:#fff;opacity:1}
+.top-actions{display:flex;gap:10px;align-items:center}
+.pill{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);border:1px solid var(--line);padding:8px 13px;border-radius:999px;font-weight:800;font-size:.86rem}
+
+/* buttons */
+.btn{border:none;border-radius:12px;padding:11px 16px;font-weight:800;cursor:pointer;color:#fff;display:inline-flex;align-items:center;gap:8px;transition:.18s}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.06)}
+.btn-primary{background:var(--accent)}
+.btn-soft{background:rgba(255,255,255,.07);border:1px solid var(--line)}
+.btn-success{background:var(--green)}
+.btn-danger{background:var(--red)}
+.btn-sm{padding:8px 12px;font-size:.84rem;border-radius:10px}
+.btn:disabled{opacity:.5;transform:none;cursor:not-allowed}
+
+/* inputs */
+.input{width:100%;background:#121219;border:1px solid var(--line);color:#fff;padding:13px 15px;border-radius:12px;outline:none;font-family:inherit}
+.input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(229,9,20,.15)}
+.input::placeholder{color:#7a7a85}
+
+/* layout */
+.page{max-width:1500px;margin:0 auto;padding:18px}
+.section{padding-top:84px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:20px}
+.small{color:var(--muted);font-size:.84rem}
+
+/* HERO */
+.hero-{position:relative;border-radius:22px;overflow:hidden;min-height:380px;display:flex;align-items:end;background:#111}
+.hero-::before{content:'';position:absolute;inset:0;background:linear-gradient(to top, #060608 8%, rgba(6,6,8,.55) 45%, rgba(6,6,8,.2));z-index:1}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=2200&auto=format&fit=crop') center/cover;filter:saturate(.95) brightness(.9)}
+.hero-inner{position:relative;z-index:2;padding:34px;max-width:760px}
+.hero-kicker{color:var(--accent);font-weight:900;font-size:.9rem;margin-bottom:8px}
+.hero-title{font-size:clamp(2rem,4.5vw,3.6rem);font-weight:900;line-height:1.05;margin:0}
+.hero-sub{color:#d1d5db;margin:12px 0 18px;line-height:1.85}
+
+/* SEARCH BAR –  style */
+.search-shell{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:rgba(0,0,0,.5);border:1px solid var(--line);padding:10px;border-radius:16px}
+.search-input{flex:1 1 320px;min-width:220px}
+.search-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chip{padding:8px 13px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);font-weight:800;font-size:.84rem;cursor:pointer}
+.chip.active,.chip:hover{background:var(--accent);border-color:transparent}
+.results-bar{display:flex;justify-content:space-between;align-items:center;padding:10px 2px;color:#b8b8c2;font-size:.9rem}
+
+/* GRID */
+.nf-row-title{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.18rem;margin:22px 0 12px}
+.nf-row-title::before{content:'';width:4px;height:22px;background:var(--accent);border-radius:3px}
+.member-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:14px}
+@media(min-width:1400px){.member-grid{grid-template-columns:repeat(auto-fill,minmax(185px,1fr))}}
+@media(max-width:520px){.member-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}}
+
+/*  poster card */
+.nf-card{position:relative;border-radius:14px;overflow:hidden;background:#12121a;border:1px solid rgba(255,255,255,.07);transition:transform .22s ease, box-shadow .22s ease, border-color .22s;cursor:pointer}
+.nf-card:hover{transform:scale(1.045) translateY(-4px);z-index:5;box-shadow:0 18px 50px rgba(0,0,0,.55);border-color:rgba(229,9,20,.45)}
+.nf-poster{aspect-ratio:2/3;width:100%;background:#15151d center/cover no-repeat;position:relative}
+.nf-poster::after{content:'';position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.92) 0%, rgba(0,0,0,.35) 38%, transparent 60%)}
+.nf-top-badge{position:absolute;top:8px;right:8px;z-index:2;background:rgba(229,9,20,.93);color:#fff;font-size:.70rem;font-weight:900;padding:5px 8px;border-radius:999px}
+.nf-overlay{position:absolute;bottom:0;left:0;right:0;padding:10px 10px 11px;z-index:2}
+.nf-name{font-weight:900;font-size:.96rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nf-meta{font-size:.78rem;color:#c8c8d2;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nf-stars{font-size:.78rem;color:#fbbf24;margin-top:4px}
+.nf-hover-actions{position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.88), rgba(0,0,0,.22));display:flex;align-items:end;justify-content:center;gap:8px;padding:12px;opacity:0;transition:.18s}
+.nf-card:hover .nf-hover-actions{opacity:1}
+.nf-icon-btn{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:16px;cursor:pointer}
+.nf-icon-btn.primary{background:var(--accent);border-color:transparent}
+
+/* search highlight */
+mark.hl{background:rgba(229,9,20,.28);color:#fff;padding:0 2px;border-radius:3px}
+
+/* GUIDE page redesign */
+.guide-hero{display:grid;grid-template-columns:92px 1fr;gap:16px;align-items:center;padding:22px;background:linear-gradient(135deg, rgba(229,9,20,.10), rgba(255,255,255,.03));border:1px solid var(--line);border-radius:18px}
+.guide-avatar{width:84px;height:84px;border-radius:20px;object-fit:cover;border:2px solid rgba(229,9,20,.4);background:#18181f}
+.guide-quick{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.icon-send{display:inline-flex;align-items:center;gap:8px}
+.guide-terms{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.term-box{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:14px;padding:14px 15px;font-size:.9rem;line-height:1.85}
+.term-box b{color:#fff}
+.term-icon{font-size:1.15rem;margin-left:6px}
+
+/* chat */
+.chat-layout{display:grid;grid-template-columns:330px 1fr;gap:16px}
+@media(max-width:1020px){.chat-layout{grid-template-columns:1fr}}
+.chat-box{min-height:520px;display:flex;flex-direction:column;padding:16px}
+.messages{flex:1;overflow:auto;display:flex;flex-direction:column;gap:9px;padding:6px 0}
+.message{max-width:78%;padding:11px 13px;border-radius:16px;line-height:1.8}
+.message.me{align-self:flex-start;background:rgba(229,9,20,.16);border:1px solid rgba(229,9,20,.28)}
+.message.them{align-self:flex-end;background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.message small{display:block;font-size:.70rem;color:#b3b3bb;margin-top:4px}
+.compose{display:flex;gap:9px;margin-top:10px}
+.empty-box{text-align:center;padding:42px 12px;color:var(--muted)}
+
+/* misc */
+.status{display:inline-flex;padding:6px 10px;border-radius:999px;font-size:.78rem;font-weight:900}
+.status.pending{background:rgba(245,158,11,.13);color:#fbbf24}
+.status.accepted{background:rgba(34,197,94,.13);color:#4ade80}
+.status.rejected{background:rgba(239,68,68,.13);color:#f87171}
+.status.processing{background:rgba(59,130,246,.13);color:#60a5fa}
+.spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:sp .75s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.user-menu{position:relative}
+.dropdown{position:absolute;top:calc(100% + 8px);left:0;background:#121219;border:1px solid var(--line);border-radius:14px;padding:6px;min-width:210px;box-shadow:0 18px 45px rgba(0,0,0,.5);opacity:0;visibility:hidden;transform:translateY(-6px);transition:.18s;z-index:50}
+.user-menu:hover .dropdown{opacity:1;visibility:visible;transform:translateY(0)}
+.drop-item{padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:700;color:#d6d6de}
+.drop-item:hover{background:rgba(255,255,255,.07);color:#fff}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<section id="screen-login">
+<div style="min-height:100vh;display:grid;place-items:center;background:url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2000&auto=format&fit=crop') center/cover">
+  <div style="background:rgba(0,0,0,.74);backdrop-filter:blur(14px);border:1px solid var(--line);padding:32px;border-radius:22px;width:min(92%,500px);text-align:center">
+    <h1 style="font-size:2rem;margin:0 0 6px;font-weight:900">الزواج <span style="color:var(--accent)">المغربي</span></h1>
+    <p class="small" style="margin-bottom:18px">منصة راقية وآمنة للتعارف الجاد من أجل الزواج</p>
+    <div id="g_id_signin" style="display:flex;justify-content:center"></div>
+    <p id="login-status" class="small" style="min-height:1.4em;margin-top:12px"></p>
+  </div>
+</div>
+</section>
+
+<!-- SETUP -->
+<section id="screen-setup" class="hidden section">
+  <div class="page">
+    <div class="card" style="padding:24px;max-width:900px;margin:auto">
+      <h2 style="margin:0 0 6px;font-weight:900;font-size:1.6rem">أكمل ملفك الشخصي</h2>
+      <p class="small" id="setup-greeting"></p>
+      <form id="profile-form" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px">
+        <div><label class="small">الاسم</label><input id="f-name" class="input" required></div>
+        <div><label class="small">البريد</label><input id="f-email" class="input" readonly dir="ltr"></div>
+        <div><label class="small">العمر</label><input id="f-age" type="number" min="18" max="99" class="input" required></div>
+        <div><label class="small">الجنس</label><select id="f-gender" class="input" required><option value="">اختر...</option><option value="ذكر">ذكر</option><option value="أنثى">أنثى</option></select></div>
+        <div><label class="small">الحالة العائلية</label><select id="f-status" class="input"><option>أعزب / عزباء</option><option>مطلق / مطلقة</option><option>أرمل / أرملة</option></select></div>
+        <div><label class="small">الطول</label><select id="f-height" class="input"><option>لا أعلم</option><option>أقل من 150 سم</option><option>150 - 160 سم</option><option>160 - 170 سم</option><option>170 - 180 سم</option><option>أطول من 180 سم</option></select></div>
+        <div><label class="small">مكان الإقامة</label><input id="f-location" class="input" required></div>
+        <div><label class="small">المدينة الأصلية</label><input id="f-birthCity" class="input" required></div>
+        <div style="grid-column:1/-1"><label class="small">نبذة عنك</label><textarea id="f-specs" class="input" rows="4"></textarea></div>
+        <div style="grid-column:1/-1;display:flex;gap:14px;align-items:center">
+          <img id="img-preview" style="width:88px;height:104px;border-radius:12px;object-fit:cover;background:#1a1a22" src="">
+          <div>
+            <label class="btn btn-soft" style="cursor:pointer">اختر صورة<input id="img-file" type="file" accept="image/*" hidden></label>
+            <div id="img-status" class="small" style="margin-top:6px">رفع آمن عبر imgbb</div>
+          </div>
+        </div>
+        <div style="grid-column:1/-1"><button class="btn btn-primary" style="width:100%" type="submit"><span id="btn-save-label">حفظ ودخول المنصة</span><span id="btn-save-spinner" class="spinner hidden"></span></button>
+        <p id="setup-error" style="color:#f87171;display:none;margin-top:8px;font-size:.9rem"></p></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- APP -->
+<section id="screen-app" class="hidden">
+<header class="navbar">
+  <div class="nav-inner">
+    <div style="display:flex;align-items:center;gap:22px">
+      <div class="brand" onclick="navigate('home')">الزواج المغربي</div>
+      <div class="nav-links" id="main-nav">
+        <span class="nav-link active" data-nav="home">تصفح</span>
+        <span class="nav-link" data-nav="requests">الطلبات</span>
+        <span class="nav-link" data-nav="guide">الموجه</span>
+        <span class="nav-link" data-nav="conversations">المحادثات</span>
+        <span class="nav-link" data-nav="profile">حسابي</span>
+        <span class="nav-link" id="nav-admin-link" data-nav="admin" style="display:none;color:#fbbf24">لوحة الموجه</span>
+      </div>
+    </div>
+    <div class="top-actions">
+      <div class="user-menu">
+        <div class="pill"><img id="nav-photo" style="width:28px;height:28px;border-radius:50%;object-fit:cover" src=""><span id="nav-name">—</span></div>
+        <div class="dropdown">
+          <div class="drop-item" onclick="navigate('profile')">👤 حسابي</div>
+          <div class="drop-item" onclick="navigate('requests')">💌 الطلبات</div>
+          <div class="drop-item" onclick="navigate('guide')">🧭 الموجه</div>
+          <div class="drop-item" onclick="navigate('conversations')">💬 المحادثات</div>
+          <div class="drop-item" id="btn-logout" style="color:#f87171">🚪 خروج</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- HOME -->
+<div id="view-home" class="page section">
+  <!--  hero -->
+  <div class="hero- card" style="border:none">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <div class="hero-kicker">الزواج المغربي • منصة راقية وآمنة للتعارف الجاد من أجل الزواج</div>
+      <h1 class="hero-title">اكتشف شريك حياتك</h1>
+      <p class="hero-sub">تصفح أنيق، بحث ذكي عربي حساس، طلبات اهتمام، ومحادثات بعد القبول، مع مرافقة الموجه.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="document.getElementById('members-section').scrollIntoView({behavior:'smooth'})">▶ ابدأ التصفح</button>
+        <button class="btn btn-soft" onclick="navigate('guide')">🧭 تحدث مع الموجه</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Smart Search -->
+  <div style="margin-top:18px" class="card" id="search-card" >
+    <div style="padding:16px">
+      <div class="search-shell">
+        <input id="q" class="input search-input" placeholder="ابحث بالاسم، المدينة، العمر، المواصفات… مثال: الدار البيضاء 28 مهندسة" autocomplete="off">
+        <div class="search-meta">
+          <button class="chip active" data-filter-gender="all">الكل</button>
+          <button class="chip" data-filter-gender="أنثى">👩 إناث</button>
+          <button class="chip" data-filter-gender="ذكر">👨 ذكور</button>
+          <button class="btn btn-soft btn-sm" id="btn-clear-search">مسح ✕</button>
+        </div>
+      </div>
+      <div class="results-bar">
+        <span id="search-stats">—</span>
+        <span class="small">بحث فوري حساس • يدعم مئات الحسابات</span>
+      </div>
+    </div>
+  </div>
+
+  <!--  rows -->
+  <div id="members-section">
+    <div class="nf-row-title">ترشيحات لك اليوم</div>
+    <div id="members-grid" class="member-grid"></div>
+    <div id="profiles-empty" class="empty-box hidden">لا توجد نتائج مطابقة. جرّب كلمات أقل.</div>
+  </div>
+</div>
+
+<!-- GUIDE – NEW REDESIGN -->
+<div id="view-guide" class="hidden page section">
+  <div class="card" style="padding:20px">
+    <div class="guide-hero">
+      <img id="guide-photo" class="guide-avatar" src="https://ui-avatars.com/api/?name=%D8%A7%D9%84%D9%85%D9%88%D8%AC%D9%87&background=E50914&color=fff&size=256" alt="">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <h2 style="margin:0;font-size:1.6rem;font-weight:900">الموجه</h2>
+          <span class="status accepted">ADMIN • متاح</span>
+          <span class="status processing" style="cursor:default">💬 مراسلة آمنة</span>
+        </div>
+        <p class="small" style="margin:8px 0 0;line-height:1.9">
+          تحدث مع الموجه داخل المنصة فقط. لديك <b>5 رسائل</b> في كل دفعة، ثم تنتظر رد الموجه ليُعاد فتح 5 رسائل جديدة.
+        </p>
+        <div class="guide-quick">
+          <button id="guide-request-btn" class="btn btn-success icon-send">📨 طلب التحدث مع الموجه</button>
+          <span id="guide-request-status" class="status processing hidden">في طور المعالجة…</span>
+          <span id="guide-remaining-box" class="status pending hidden">الرسائل المتبقية: 5</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- chat -->
+    <div id="guide-chat-wrapper" class="hidden" style="margin-top:16px">
+      <div class="card chat-box">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <h3 style="margin:0;font-weight:900">🧭 محادثة مع الموجه</h3>
+          <span class="small">مشفرة داخل المنصة</span>
+        </div>
+        <div id="guide-messages" class="messages"></div>
+        <div class="compose">
+          <input id="guide-message-input" class="input" placeholder="اكتب رسالتك للموجه… 📩">
+          <button id="guide-send-btn" class="btn btn-primary">إرسال ✈️</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- شروط الإرسال -->
+    <div style="margin-top:18px">
+      <h3 style="margin:0 0 10px;font-weight:900">📜 شروط إرسال الرسائل للموجه</h3>
+      <div class="guide-terms">
+        <div class="term-box"><span class="term-icon">🤝</span><b>الاحترام المتبادل</b><br>التواصل بأدب واحترام كامل، يمنع أي إساءة لفظية.</div>
+        <div class="term-box"><span class="term-icon">🚫</span><b>يمنع السب أو التحرش</b><br>أي تحرش أو إلحاح أو كلام غير لائق = حظر فوري.</div>
+        <div class="term-box"><span class="term-icon">💍</span><b>نية الزواج الجاد فقط</b><br>المنصة للتعارف الجاد بغرض الزواج الحلال.</div>
+        <div class="term-box"><span class="term-icon">🔒</span><b>احترام الخصوصية</b><br>لا تشارك بيانات الآخرين، ولا تطلب أرقام خارج المنصة إلا بعد القبول.</div>
+        <div class="term-box"><span class="term-icon">📨</span><b>5 رسائل فقط</b><br>لكل دفعة 5 رسائل. انتظر رد الموجه لإعادة التفعيل.</div>
+        <div class="term-box"><span class="term-icon">📷</span><b>صور حقيقية</b><br>يمنع انتحال الشخصية أو صور لا تخص صاحب الحساب.</div>
+      </div>
+      <p class="small" style="margin-top:10px">بالضغط على “طلب التحدث” أنت توافق على هذه الشروط. المخالفة تؤدي لحذف الحساب نهائيًا.</p>
+    </div>
+  </div>
+</div>
+
+<!-- REQUESTS -->
+<div id="view-requests" class="hidden page section">
+  <div class="card" style="padding:18px">
+    <h2 style="margin:0 0 8px;font-weight:900">الطلبات</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div><h4>الواردة <span id="incoming-count" class="status pending">0</span></h4><div id="incoming-requests"></div></div>
+      <div><h4>المرسلة <span id="outgoing-count" class="status pending">0</span></h4><div id="outgoing-requests"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONVERSATIONS -->
+<div id="view-conversations" class="hidden page section">
+  <div class="card" style="padding:18px">
+    <h2 style="margin:0 0 12px;font-weight:900">المحادثات الخاصة</h2>
+    <div class="chat-layout">
+      <div class="card" style="padding:12px;max-height:600px;overflow:auto"><div id="conversations-list"></div></div>
+      <div class="card chat-box">
+        <div><div id="conversation-title" style="font-weight:900;font-size:1.1rem">اختر محادثة</div><div id="conversation-sub" class="small">—</div></div>
+        <div id="conversation-messages" class="messages"></div>
+        <div class="compose"><input id="conversation-input" class="input" placeholder="اكتب رسالتك…"><button id="conversation-send-btn" class="btn btn-primary">إرسال</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div id="view-profile" class="hidden page section">
+  <div class="card" style="padding:20px;max-width:980px;margin:auto">
+    <h2 style="margin:0 0 12px;font-weight:900">حسابي</h2>
+    <form id="me-form" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div style="grid-column:1/-1"><label class="small">الاسم</label><input id="me-name-input" class="input"></div>
+      <div><label class="small">العمر</label><input id="me-age" type="number" class="input"></div>
+      <div><label class="small">الجنس</label><select id="me-gender" class="input"><option>ذكر</option><option>أنثى</option></select></div>
+      <div><label class="small">مكان الإقامة</label><input id="me-location" class="input"></div>
+      <div><label class="small">المدينة الأصلية</label><input id="me-birthCity" class="input"></div>
+      <div><label class="small">الطول</label><select id="me-height" class="input"><option>لا أعلم</option><option>أقل من 150 سم</option><option>150 - 160 سم</option><option>160 - 170 سم</option><option>170 - 180 سم</option><option>أطول من 180 سم</option></select></div>
+      <div><label class="small">الحالة</label><select id="me-status" class="input"><option>أعزب / عزباء</option><option>مطلق / مطلقة</option><option>أرمل / أرملة</option></select></div>
+      <div style="grid-column:1/-1"><label class="small">نبذة</label><textarea id="me-specs" class="input" rows="4"></textarea></div>
+      <div style="grid-column:1/-1;display:flex;gap:10px">
+        <button class="btn btn-primary" type="submit" id="btn-me-save"><span id="btn-me-label">حفظ</span><span id="btn-me-spinner" class="spinner hidden"></span></button>
+        <button type="button" id="btn-me-delete" class="btn btn-danger">حذف حسابي</button>
+        <span id="me-ok" class="small" style="display:none;color:#4ade80">تم الحفظ ✓</span>
+        <span id="me-error" class="small" style="display:none;color:#f87171"></span>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div id="view-admin" class="hidden page section">
+  <div class="card" style="padding:18px">
+    <h2 style="margin:0;font-weight:900">لوحة الموجه 🛡️</h2>
+    <p class="small">ADMIN</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0">
+      <div class="term-box">الحسابات<br><b id="admin-total-profiles" style="font-size:1.6rem">0</b></div>
+      <div class="term-box">طلبات الاهتمام<br><b id="admin-total-requests" style="font-size:1.6rem">0</b></div>
+      <div class="term-box">طلبات التحدث<br><b id="admin-total-guide-requests" style="font-size:1.6rem">0</b></div>
+      <div class="term-box">إعادة التسجيل<br><b id="admin-total-pending-approvals" style="font-size:1.6rem">0</b></div>
+      <div class="term-box">الرسائل<br><b id="admin-total-messages" style="font-size:1.6rem">0</b></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div class="card" style="padding:14px"><h4>طلبات التحدث</h4><div id="admin-guide-requests"></div></div>
+      <div class="card" style="padding:14px"><h4>إعادة التسجيل</h4><div id="admin-registration-requests"></div></div>
+    </div>
+    <div class="card" style="padding:14px;margin-top:14px"><h4>المستخدمون</h4><div id="admin-users-list"></div></div>
+    <div class="card" style="padding:14px;margin-top:14px">
+      <h4>محادثات الموجه</h4>
+      <div style="display:grid;grid-template-columns:320px 1fr;gap:12px">
+        <div id="admin-chat-requests-list" style="max-height:460px;overflow:auto"></div>
+        <div>
+          <div id="admin-conversation-title" style="font-weight:900">اختر طلبًا</div>
+          <div id="admin-conversation-sub" class="small">—</div>
+          <div id="admin-conversation-messages" class="messages" style="height:340px"></div>
+          <div class="compose"><input id="admin-message-input" class="input" placeholder="رد الموجه…"><button id="admin-send-btn" class="btn btn-primary">إرسال</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- detail modal -->
+<div id="detail-page" style="position:fixed;inset:0;background:#060608;z-index:200;overflow:auto;transform:translateY(105%);transition:.28s" class="">
+  <button id="detail-close" style="position:fixed;top:14px;left:14px;z-index:10;background:rgba(0,0,0,.6);border:1px solid var(--line);color:#fff;border-radius:50%;width:40px;height:40px;cursor:pointer">✕</button>
+  <div id="detail-hero" style="min-height:56vh;display:flex;align-items:end;padding:26px 5%;background-size:cover;background-position:center;position:relative">
+    <div style="position:absolute;inset:0;background:linear-gradient(to top,#060608,rgba(0,0,0,.55),transparent)"></div>
+    <div style="position:relative;z-index:2">
+      <h2 id="detail-name" style="font-size:2.2rem;margin:0;font-weight:900"></h2>
+      <p id="detail-meta" style="color:var(--accent);font-weight:800;margin:6px 0"></p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin:8px 0" id="detail-tags">
+        <span id="detail-location" class="chip"></span>
+        <span id="detail-birth" class="chip"></span>
+        <span id="detail-height" class="chip"></span>
+        <span id="detail-status" class="chip"></span>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin:10px 0">
+        <button id="detail-interest-btn" class="btn btn-primary">مهتم ❤️</button>
+        <button id="detail-chat-btn" class="btn btn-success hidden">دخول المحادثة 💬</button>
+      </div>
+      <div id="detail-rating-line" class="small"></div>
+      <div id="detail-rate-stars" style="margin:6px 0"></div>
+    </div>
+  </div>
+  <div style="padding:20px 5%;max-width:900px">
+    <h3 style="font-weight:900">نبذة شخصية</h3>
+    <p id="detail-specs-full" style="line-height:2;color:#d6d6de;white-space:pre-wrap"></p>
+  </div>
+</div>
+
+<footer style="text-align:center;padding:30px;color:#6b7280;font-size:.85rem">الزواج المغربي © <span id="year"></span> — منصة راقية وآمنة • خصوصية وأمان</footer>
+</section>
+
+<script>
+/* ===== CONFIG ===== */
+const CONFIG = {
+  API_URL: window.MATCHNEST_API_URL || 'https://script.google.com/macros/s/AKfycbw5o9hS6XShBfvASYILPGkyyJ3meapjh7SPL6liDEKq9etcri3f39GmrN7CkDwIm79S/exec',
+  GOOGLE_CLIENT_ID: '408822175136-pq5trb8589sldjmdandd4olvmh9mhdt6.apps.googleusercontent.com',
+  IMGBB_KEY: 'ce4eaccfa00df80ccefae51417e8bda4'
+};
+window.CONFIG = CONFIG;
+
+/* ===== STATE ===== */
+const state = { user:null, myProfile:null, profiles:[], selectedBrowseGender:'', searchQuery:'', isAdmin:false, currentConversationEmail:null, guideRequestId:null, adminCurrentRequest:null };
+window.state = state;
+const $ = id => document.getElementById(id);
+const show = id => $(id)?.classList.remove('hidden');
+const hide = id => $(id)?.classList.add('hidden');
+const esc = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* Toast */
+function toast(m, ok=true){
+  const n=document.createElement('div');
+  n.textContent=m;
+  n.style.cssText='position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:'+(ok?'#16a34a':'#e50914')+';color:#fff;padding:10px 18px;border-radius:12px;font-weight:800;z-index:9999;box-shadow:0 10px 30px rgba(0,0,0,.4)';
+  document.body.appendChild(n); setTimeout(()=>n.remove(), 2800);
+}
+
+/* Google auth */
+function decodeJwt(t){ try{ const p=t.split('.')[1].replace(/-/g,'+').replace(/_/g,'/'); return JSON.parse(decodeURIComponent(atob(p).split('').map(c=>'%'+('00'+c.charCodeAt(0).toString(16)).slice(-2)).join(''))) }catch(e){return null}}
+async function deriveActivationCode(email){ const d=new TextEncoder().encode('MATCHNEST::'+email.toLowerCase().trim()); const h=await crypto.subtle.digest('SHA-256',d); return Array.from(new Uint8Array(h)).map(b=>b.toString(16).padStart(2,'0')).join('').slice(0,8).toUpperCase() }
+const API = { async request(payload, timeoutMs=18000){
+  const url=new URL(CONFIG.API_URL);
+  Object.entries(payload).forEach(([k,v])=>{ if(v!==undefined&&v!==null) url.searchParams.append(k,String(v)) });
+  const ctrl = new AbortController();
+  const timer = setTimeout(()=>ctrl.abort(), timeoutMs);
+  try{
+    const r=await fetch(url.toString(),{method:'GET',redirect:'follow',signal:ctrl.signal,cache:'no-store'});
+    if(!r.ok) throw new Error('تعذر الاتصال بالخادم: '+r.status);
+    const j=await r.json();
+    if(j.status==='error') throw new Error(j.msg||'خطأ');
+    return j;
+  }catch(err){
+    if(err.name==='AbortError') throw new Error('الخادم تأخر في الرد. حاول مرة أخرى.');
+    throw err;
+  }finally{ clearTimeout(timer); }
+}};
+window.API = API;
+
+let _gsiAttempts = 0;
+function googleStatus(msg, color='#fbbf24'){
+  const el = $('login-status');
+  if(el){ el.textContent = msg; el.style.color = color; }
+}
+function googleErrorText(e){
+  const msg = String(e?.message || e || '').toLowerCase();
+  if(msg.includes('origin') || msg.includes('unauthorized') || msg.includes('not allowed')) return 'يجب إضافة هذا الدومين في Google OAuth: '+location.origin;
+  if(location.protocol !== 'https:' && location.hostname !== 'localhost') return 'تسجيل Google يحتاج HTTPS. افتح رابط Netlify النهائي.';
+  return 'تعذر تجهيز Google. جرّب تحديث الصفحة أو فتح الموقع من Chrome بدون مانع إعلانات.';
+}
+function initGoogle(){
+  const box = document.getElementById('g_id_signin');
+  if(!box) return;
+  if(!window.google?.accounts?.id){
+    if(_gsiAttempts++ < 60) return setTimeout(initGoogle,250);
+    return googleStatus('تعذر تحميل مكتبة Google. تحقق من الاتصال أو مانع الإعلانات.');
+  }
+  try{
+    google.accounts.id.initialize({client_id:CONFIG.GOOGLE_CLIENT_ID,callback:handleGoogleCredential,auto_select:false,cancel_on_tap_outside:true});
+    box.innerHTML='';
+    google.accounts.id.renderButton(box,{type:'standard',theme:'filled_black',size:'large',width:300});
+    googleStatus('', '#9ca3af');
+  }catch(e){
+    console.error('Google Sign-In error', e);
+    googleStatus(googleErrorText(e), '#f87171');
+  }
+}
+async function handleGoogleCredential(res){
+  const p=decodeJwt(res?.credential); if(!p?.email){ googleStatus('لم نستلم بيانات Google. حاول مرة أخرى.', '#f87171'); return; }
+  googleStatus('جاري تسجيل الدخول…');
+  const email=String(p.email).toLowerCase(), name=p.name||email.split('@')[0], picture=p.picture||'';
+  const code=await deriveActivationCode(email);
+  try{
+    const r=await API.request({action:'login',email,code});
+    if(r.profile){ state.user={email, name:r.profile.name||name, picture:r.profile.imageUrl||picture, activationCode:code}; sessionStorage.setItem('mn_user',JSON.stringify(state.user)); return enterApp(); }
+    if(r.status==='pending_approval' || r.status==='rejected'){ googleStatus(r.msg||'طلبك قيد مراجعة الموجه', '#fbbf24'); return; }
+  }catch(e){ console.warn('Login check failed; opening setup for new profile', e); }
+  state.user={email,name,picture,activationCode:code};
+  sessionStorage.setItem('mn_user',JSON.stringify(state.user));
+  openSetup();
+}
+function openSetup(){
+  document.getElementById('screen-login').classList.add('hidden');
+  document.getElementById('screen-setup').classList.remove('hidden');
+  $('setup-greeting').textContent='مرحباً، '+(state.user.name.split(' ')[0]||'');
+  $('f-name').value=state.user.name; $('f-email').value=state.user.email;
+}
+
+/* ===== ARABIC SMART SEARCH ===== */
+function arNormalize(s){
+  return String(s||'').toLowerCase()
+    .normalize('NFKD')
+    .replace(/[\u064B-\u065F\u0670\u06D6-\u06ED]/g,'')
+    .replace(/[أإآٱ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/ؤ/g,'و').replace(/ئ/g,'ي')
+    .replace(/[^a-z0-9\u0600-\u06FF\s]/g,' ')
+    .replace(/\s+/g,' ').trim();
+}
+// fuzzy: all terms must appear somewhere
+function searchScore(profile, terms){
+  if(!terms.length) return 1;
+  const hay = arNormalize([profile.name, profile.location, profile.birthCity, profile.specs, profile.gender, profile.age, profile.status, profile.height].join(' • '));
+  let score=0;
+  for(const t of terms){ if(hay.includes(t)) score+= t.length; else return 0; }
+  // boost name / location matches
+  if(arNormalize(profile.name).includes(terms[0])) score+=5;
+  if(arNormalize(profile.location).includes(terms[0])) score+=3;
+  return score;
+}
+function getFilteredProfiles(){
+  const q = arNormalize(state.searchQuery);
+  const terms = q ? q.split(' ').filter(Boolean) : [];
+  let list = state.profiles.filter(p=>{
+    if(state.selectedBrowseGender && p.gender !== state.selectedBrowseGender) return false;
+    if(!terms.length) return true;
+    return searchScore(p, terms) > 0;
+  });
+  if(terms.length){
+    list = list.map(p=>({...p, _s: searchScore(p, terms)})).sort((a,b)=> b._s - a._s);
+  }
+  return list;
+}
+function highlight(text, query){
+  if(!query) return esc(text);
+  const terms = arNormalize(query).split(' ').filter(t=>t.length>1);
+  let out = esc(text);
+  terms.forEach(t=>{
+    const re = new RegExp('('+t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
+    out = out.replace(re,'<mark class="hl">$1</mark>');
+  });
+  return out;
+}
+
+/* ===== RENDER CARDS ===== */
+function cardImage(p){ return p.imageUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(p.name||'User')}&background=E50914&color=fff&size=400`; }
+function nfCard(p, query=''){
+  const meta = p.isAdmin ? 'الموجه' : [p.age? p.age+' سنة':'', p.location||''].filter(Boolean).join(' • ');
+  const stars = p.isAdmin ? '' : `<div class="nf-stars">${'★'.repeat(Math.round(p.ratingAverage||0))}<span style="color:#9aa0a6"> ${(p.ratingAverage||0).toFixed(1)} • ${p.ratingCount||0}</span></div>`;
+  const badge = p.isAdmin ? 'ADMIN' : (p.gender==='أنثى'?'👩':'👨');
+  return `<div class="nf-card" data-email="${esc(p.email||'')}">
+    <div class="nf-poster" style="background-image:url('${esc(cardImage(p))}')">
+      <div class="nf-top-badge">${badge}</div>
+      <div class="nf-overlay">
+        <div class="nf-name">${highlight(p.name||'عضو', query)}</div>
+        <div class="nf-meta">${esc(meta)}</div>
+        ${stars}
+      </div>
+      <div class="nf-hover-actions">
+        <button class="nf-icon-btn open-detail-btn" data-email="${esc(p.email||'')}" title="عرض">👁️</button>
+        <button class="nf-icon-btn primary quick-action-btn" data-email="${esc(p.email||'')}" title="${p.isAdmin?'تحدث':'مهتم'}">${p.isAdmin?'💬':'❤️'}</button>
+      </div>
+    </div>
+  </div>`;
+}
+function renderProfiles(){
+  const grid=$('members-grid');
+  const q = state.searchQuery||'';
+  const list=getFilteredProfiles();
+  $('search-stats').textContent = list.length ? `عُثر على ${list.length} نتيجة${q?` لـ “${q}”`:''}` : 'لا نتائج';
+  if(!list.length){ grid.innerHTML=''; $('profiles-empty').classList.remove('hidden'); return; }
+  $('profiles-empty').classList.add('hidden');
+  // virtual: limit first 120 for performance, with “load more”
+  const showList = list.slice(0, 180);
+  grid.innerHTML = showList.map(p=>nfCard(p,q)).join('') + (list.length>180?`<div style="grid-column:1/-1;text-align:center;padding:12px"><button class="btn btn-soft" onclick="alert('يوجد ${list.length} نتيجة – استعمل البحث للتضييق')">عرض ${list.length-180} إضافية…</button></div>`:'');
+  // wire
+  grid.querySelectorAll('.open-detail-btn').forEach(b=> b.onclick = e=>{ e.stopPropagation(); const p=state.profiles.find(x=>x.email===b.dataset.email); if(p) openDetail(p)} );
+  grid.querySelectorAll('.quick-action-btn').forEach(b=> b.onclick = async e=>{ e.stopPropagation(); const p=state.profiles.find(x=>x.email===b.dataset.email); if(!p) return; if(p.isAdmin){ navigate('guide'); return;} try{ await API.request({action:'sendInterest',senderEmail:state.user.email,receiverEmail:p.email,activationCode:state.user.activationCode}); toast('تم إرسال طلب الاهتمام ✓')}catch(err){toast(err.message,false)} });
+  grid.querySelectorAll('.nf-card').forEach(c=> c.onclick = ()=>{ const p=state.profiles.find(x=>x.email===c.dataset.email); if(p) openDetail(p) });
+}
+
+/* ===== APP FLOW ===== */
+async function fetchMyProfile(){
+  const r=await API.request({action:'login',email:state.user.email,code:state.user.activationCode});
+  state.myProfile=r.profile; state.isAdmin=!!r.profile.isAdmin;
+  $('nav-photo').src = state.myProfile.imageUrl || state.user.picture || 'https://ui-avatars.com/api/?name=U&background=333&color=fff';
+  $('nav-name').textContent = state.isAdmin ? 'الموجه' : (state.myProfile.name||state.user.name);
+  document.getElementById('nav-admin-link').style.display = state.isAdmin ? '' : 'none';
+}
+async function enterApp(){
+  document.getElementById('screen-login').classList.add('hidden');
+  document.getElementById('screen-setup').classList.add('hidden');
+  document.getElementById('screen-app').classList.remove('hidden');
+  await fetchMyProfile();
+  await loadProfiles();
+  navigate(state.isAdmin ? 'admin' : 'home');
+}
+async function loadProfiles(){ const r=await API.request({action:'list'}); state.profiles = Array.isArray(r.profiles)?r.profiles:[]; renderProfiles(); }
+
+function navigate(v){
+  ['view-home','view-requests','view-guide','view-conversations','view-admin','view-profile'].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.add('hidden') });
+  const map={home:'view-home',requests:'view-requests',guide:'view-guide',conversations:'view-conversations',admin:'view-admin',profile:'view-profile'};
+  if(map[v]) document.getElementById(map[v]).classList.remove('hidden');
+  document.querySelectorAll('.nav-link').forEach(n=> n.classList.toggle('active', n.dataset.nav===v));
+  if(v==='requests') loadRequests();
+  if(v==='guide') loadGuide();
+  if(v==='conversations') loadConversations();
+  if(v==='admin') loadAdmin();
+  if(v==='profile') renderMyProfile();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* detail */
+function openDetail(p){
+  const dp=document.getElementById('detail-page');
+  $('detail-name').textContent = p.isAdmin ? 'الموجه' : p.name + (p.age? '، '+p.age:'');
+  $('detail-meta').textContent = p.isAdmin ? 'ADMIN' : (p.gender||'');
+  document.getElementById('detail-hero').style.backgroundImage = `url('${cardImage(p)}')`;
+  ['detail-location','detail-birth','detail-height','detail-status'].forEach((id,i)=>{
+    const vals=[p.location||'-', p.birthCity||'-', p.height||'-', p.status||'-'];
+    const el=document.getElementById(id); if(el) el.textContent = vals[i];
+  });
+  document.getElementById('detail-specs-full').textContent = p.specs || 'لم يكتب نبذة بعد.';
+  $('detail-rating-line').textContent = p.isAdmin ? '' : `التقييم: ${(p.ratingAverage||0).toFixed(1)} ★ (${p.ratingCount||0})`;
+  const ib=$('detail-interest-btn');
+  ib.textContent = p.isAdmin ? '📨 طلب التحدث' : '❤️ مهتم';
+  ib.onclick = async ()=>{
+    try{
+      if(p.isAdmin){ await API.request({action:'requestAdminChat',email:state.user.email,code:state.user.activationCode}); toast('تم إرسال طلب للموجه ✓'); navigate('guide'); closeDetail(); return }
+      await API.request({action:'sendInterest',senderEmail:state.user.email,receiverEmail:p.email,activationCode:state.user.activationCode});
+      toast('تم إرسال طلب الاهتمام ✓');
+    }catch(e){ toast(e.message,false) }
+  };
+  dp.style.transform='translateY(0)';
+}
+function closeDetail(){ document.getElementById('detail-page').style.transform='translateY(105%)' }
+$('detail-close').onclick = closeDetail;
+
+/* requests */
+async function loadRequests(){
+  try{
+    const r=await API.request({action:'getMyRequests',email:state.user.email,code:state.user.activationCode});
+    $('incoming-count').textContent=r.incoming.length;
+    $('outgoing-count').textContent=r.outgoing.length;
+    $('incoming-requests').innerHTML = r.incoming.map(x=>`<div style="padding:10px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;gap:8px"><div><b>${esc(x.senderProfile?.name||x.senderEmail)}</b><div class="small">${esc(x.senderProfile?.location||'')}</div></div><div>${x.status==='pending'?`<button class="btn btn-success btn-sm" onclick="respondReq('${x.requestId}','accepted')">قبول</button> <button class="btn btn-danger btn-sm" onclick="respondReq('${x.requestId}','rejected')">رفض</button>`:`<span class="status ${x.status}">${x.status}</span>`}</div></div>`).join('') || '<p class="small">لا توجد طلبات واردة</p>';
+    $('outgoing-requests').innerHTML = r.outgoing.map(x=>`<div style="padding:10px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px"><b>${esc(x.receiverProfile?.name||x.receiverEmail)}</b> – <span class="status ${x.status}">${x.status}</span><div class="small">محاولات متبقية: ${x.remainingAttempts}</div></div>`).join('') || '<p class="small">لا توجد طلبات مرسلة</p>';
+  }catch(e){ toast(e.message,false) }
+}
+window.respondReq = async (id,resp)=>{ try{ await API.request({action:'respondInterest',requestId:id,email:state.user.email,code:state.user.activationCode,responseStatus:resp}); toast(resp==='accepted'?'تم القبول ✓':'تم الرفض'); loadRequests(); }catch(e){ toast(e.message,false)} }
+
+/* guide */
+async function loadGuide(){
+  try{
+    const s=await API.request({action:'getAdminChatStatus',email:state.user.email,code:state.user.activationCode});
+    state.guideRequestId = s.requestId||null;
+    const btn=$('guide-request-btn'), st=$('guide-request-status'), wrap=$('guide-chat-wrapper'), rem=$('guide-remaining-box');
+    if(s.requestStatus==='opened' && s.requestId){
+      btn.disabled=true; st.classList.add('hidden'); wrap.classList.remove('hidden'); rem.classList.remove('hidden'); rem.textContent='الرسائل المتبقية: '+(s.remainingUserMessages??5); rem.className='status '+(s.remainingUserMessages>0?'accepted':'rejected');
+      const chat=await API.request({action:'getAdminChatMessages',email:state.user.email,code:state.user.activationCode,requestId:s.requestId});
+      renderChat('guide-messages', chat.messages||[], 'user');
+    } else if(s.requestStatus==='pending'){
+      btn.disabled=true; st.classList.remove('hidden'); wrap.classList.add('hidden');
+    } else {
+      btn.disabled=false; st.classList.add('hidden'); wrap.classList.add('hidden');
+    }
+  }catch(e){ /* ignore */ }
+}
+function renderChat(boxId, msgs, meType='senderEmail'){
+  const box=$(boxId); if(!box) return;
+  if(!msgs.length){ box.innerHTML='<p class="small">لا توجد رسائل بعد.</p>'; return }
+  box.innerHTML = msgs.map(m=>{
+    const isMe = meType==='user' ? m.senderType==='user' : m.senderEmail===state.user.email;
+    return `<div class="message ${isMe?'me':'them'}">${esc(m.messageText)}<small>${esc(m.createdAt||'')}</small></div>`;
+  }).join('');
+  box.scrollTop = box.scrollHeight;
+}
+
+/* conversations */
+async function loadConversations(){
+  try{
+    const r=await API.request({action:'getConversations',email:state.user.email,code:state.user.activationCode});
+    const list=r.conversations||[];
+    $('conversations-list').innerHTML = list.length ? list.map(c=>`<div style="padding:10px;border-bottom:1px solid var(--line);cursor:pointer" onclick="openConv('${c.otherEmail}')"><b>${esc(c.otherProfile?.name||c.otherEmail)}</b><div class="small">${esc((c.lastMessage||'').slice(0,60))}</div></div>`).join('') : '<p class="small">لا توجد محادثات بعد</p>';
+  }catch(e){ $('conversations-list').innerHTML='<p class="small" style="color:#f87171">تعذر التحميل</p>'}
+}
+window.openConv = async (email)=>{
+  state.currentConversationEmail=email;
+  $('conversation-title').textContent=email;
+  try{
+    const r=await API.request({action:'getMessages',email:state.user.email,code:state.user.activationCode,otherEmail:email});
+    renderChat('conversation-messages', r.messages||[], 'senderEmail');
+  }catch(e){ toast(e.message,false) }
+}
+
+/* profile */
+function renderMyProfile(){
+  const p=state.myProfile||{};
+  ['me-name-input','me-age','me-gender','me-location','me-birthCity','me-height','me-status','me-specs'].forEach(id=>{
+    const el=document.getElementById(id); if(!el) return;
+    const map={ 'me-name-input':p.name, 'me-age':p.age, 'me-gender':p.gender, 'me-location':p.location, 'me-birthCity':p.birthCity, 'me-height':p.height, 'me-status':p.status, 'me-specs':p.specs };
+    el.value = map[id]||'';
+    el.disabled = !!p.isAdmin;
+  });
+}
+
+/* admin */
+async function loadAdmin(){
+  if(!state.isAdmin) return;
+  try{
+    const d=await API.request({action:'adminDashboard',email:state.user.email,code:state.user.activationCode});
+    $('admin-total-profiles').textContent=d.totals.profiles;
+    $('admin-total-requests').textContent=d.totals.requests;
+    $('admin-total-guide-requests').textContent=d.totals.adminChatRequests;
+    $('admin-total-pending-approvals').textContent=d.totals.pendingRegistrationRequests;
+    $('admin-total-messages').textContent=(d.totals.memberMessages||0)+(d.totals.adminMessages||0);
+    // reg requests
+    $('admin-registration-requests').innerHTML = (d.registrationRequests||[]).map(r=>`<div style="padding:10px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px"><b>${esc(r.name)}</b> – ${esc(r.email)}<br><span class="small">${esc(r.location||'')} • ${esc(r.age||'') } سنة</span><div style="margin-top:6px"><button class="btn btn-success btn-sm" onclick="reviewReg('${r.requestId}','approved')">موافقة</button> <button class="btn btn-danger btn-sm" onclick="reviewReg('${r.requestId}','rejected')">رفض</button></div></div>`).join('') || '<p class="small">لا توجد طلبات</p>';
+    // users
+    const users = state.profiles.filter(u=>!u.isAdmin);
+    $('admin-users-list').innerHTML = users.map(u=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:8px;border-bottom:1px solid var(--line)"><span>${esc(u.name)} – <span class="small">${esc(u.email)}</span></span><button class="btn btn-danger btn-sm" onclick="adminDel('${u.email}')">حذف</button></div>`).join('') || '—';
+    // guide requests
+    const gr = await API.request({action:'adminGetChatRequests',email:state.user.email,code:state.user.activationCode});
+    $('admin-guide-requests').innerHTML = (gr.requests||[]).map(x=>`<div style="padding:8px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center"><div><b>${esc(x.userProfile?.name||x.userEmail)}</b><div class="small">رسائل متبقية: ${x.remainingUserMessages} • ${x.requestStatus}</div></div><div><button class="btn btn-success btn-sm" onclick="adminOpen('${x.requestId}')">فتح</button> <button class="btn btn-soft btn-sm" onclick="adminRead('${x.requestId}')">عرض</button></div></div>`).join('')||'<p class="small">لا توجد طلبات</p>';
+    document.getElementById('admin-chat-requests-list').innerHTML = document.getElementById('admin-guide-requests').innerHTML;
+  }catch(e){ toast(e.message,false) }
+}
+window.reviewReg = async (id,dec)=>{ try{ await API.request({action:'adminReviewRegistrationRequest',email:state.user.email,code:state.user.activationCode,requestId:id,decision:dec}); toast(dec==='approved'?'تمت الموافقة ✓':'تم الرفض'); loadAdmin(); loadProfiles(); }catch(e){ toast(e.message,false)} }
+window.adminDel = async (email)=>{ if(!confirm('حذف '+email+' ؟')) return; try{ await API.request({action:'adminDeleteUser',email:state.user.email,code:state.user.activationCode,targetEmail:email}); toast('تم الحذف'); loadProfiles(); loadAdmin(); }catch(e){ toast(e.message,false)} }
+window.adminOpen = async (id)=>{ try{ await API.request({action:'adminOpenChatRequest',email:state.user.email,code:state.user.activationCode,requestId:id}); toast('تم الفتح'); adminRead(id); }catch(e){ toast(e.message,false)} }
+window.adminRead = async (id)=>{ state.adminCurrentRequest=id; $('admin-conversation-title').textContent='محادثة #'+id.slice(-6); const r=await API.request({action:'getAdminChatMessages',email:state.user.email,code:state.user.activationCode,requestId:id}); const box=$('admin-conversation-messages'); box.innerHTML = (r.messages||[]).map(m=>`<div class="message ${m.senderType==='admin'?'me':'them'}">${esc(m.messageText)}<small>${esc(m.createdAt||'')}</small></div>`).join('') || '<p class="small">لا رسائل</p>'; box.scrollTop=box.scrollHeight; }
+
+/* ===== EVENTS ===== */
+document.addEventListener('DOMContentLoaded', ()=>{
+  $('year').textContent = new Date().getFullYear();
+  initGoogle();
+  const cached = sessionStorage.getItem('mn_user');
+  if(cached){ try{ state.user=JSON.parse(cached); enterApp(); }catch(e){ sessionStorage.removeItem('mn_user') } }
+
+  // search – robust arabic
+  let tmr;
+  const qInput=$('q');
+  if(qInput){
+    const run = ()=>{ state.searchQuery = qInput.value; clearTimeout(tmr); tmr=setTimeout(renderProfiles, 120) };
+    ['input','keyup','change'].forEach(ev=> qInput.addEventListener(ev, run));
+  }
+  document.getElementById('btn-clear-search')?.addEventListener('click', ()=>{ $('q').value=''; state.searchQuery=''; renderProfiles(); });
+  document.querySelectorAll('[data-filter-gender]').forEach(b=> b.addEventListener('click', ()=>{
+    document.querySelectorAll('[data-filter-gender]').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    state.selectedBrowseGender = b.dataset.filterGender==='all' ? '' : b.dataset.filterGender;
+    renderProfiles();
+  }));
+
+  // nav
+  document.querySelectorAll('.nav-link').forEach(n=> n.addEventListener('click', ()=> navigate(n.dataset.nav)));
+  document.getElementById('btn-logout')?.addEventListener('click', ()=>{ sessionStorage.removeItem('mn_user'); location.reload(); });
+
+  // register form
+  document.getElementById('profile-form')?.addEventListener('submit', async e=>{
+    e.preventDefault();
+    const err=$('setup-error'); err.style.display='none';
+    $('btn-save-label').textContent='جاري الحفظ…'; document.getElementById('btn-save-spinner').classList.remove('hidden');
+    try{
+      const payload={ name:$('f-name').value.trim(), age:$('f-age').value, gender:$('f-gender').value, status:$('f-status').value, location:$('f-location').value.trim(), birthCity:$('f-birthCity').value.trim(), height:$('f-height').value, specs:$('f-specs').value.trim(), imageUrl: window._pendingImg || state.user.picture || '' };
+      const res=await API.request({action:'register', email:state.user.email, activationCode:state.user.activationCode, ...payload});
+      if(res.status==='pending_approval'){ alert(res.msg||'بانتظار موافقة الموجه'); sessionStorage.removeItem('mn_user'); location.reload(); return }
+      toast('مرحباً بك! 🎉'); await enterApp();
+    }catch(ex){ err.textContent=ex.message; err.style.display='block'; }
+    finally{ $('btn-save-label').textContent='حفظ ودخول المنصة'; document.getElementById('btn-save-spinner').classList.add('hidden'); }
+  });
+
+  // image upload
+  document.getElementById('img-file')?.addEventListener('change', async e=>{
+    const f=e.target.files[0]; if(!f) return;
+    $('img-status').textContent='جاري الرفع…';
+    try{
+      const b64 = await new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(r.result.split(',')[1]); r.onerror=rej; r.readAsDataURL(f) });
+      const fd=new FormData(); fd.append('key', CONFIG.IMGBB_KEY); fd.append('image', b64);
+      const up=await fetch('https://api.imgbb.com/1/upload',{method:'POST',body:fd}).then(x=>x.json());
+      if(!up.success) throw new Error('فشل الرفع');
+      window._pendingImg = up.data.display_url || up.data.url;
+      $('img-preview').src = window._pendingImg;
+      $('img-status').textContent='✓ تم الرفع';
+    }catch(ex){ $('img-status').textContent='✗ '+ex.message }
+  });
+
+  // me form
+  document.getElementById('me-form')?.addEventListener('submit', async e=>{
+    e.preventDefault();
+    try{
+      const payload={ name:document.getElementById('me-name-input').value, age:document.getElementById('me-age').value, gender:document.getElementById('me-gender').value, location:document.getElementById('me-location').value, birthCity:document.getElementById('me-birthCity').value, height:document.getElementById('me-height').value, status:document.getElementById('me-status').value, specs:document.getElementById('me-specs').value, imageUrl: state.myProfile?.imageUrl||'' };
+      await API.request({action:'update', activationCode: state.user.activationCode, ...payload});
+      document.getElementById('me-ok').style.display='inline'; setTimeout(()=>document.getElementById('me-ok').style.display='none',2000);
+      await fetchMyProfile(); loadProfiles();
+    }catch(ex){ const er=document.getElementById('me-error'); er.textContent=ex.message; er.style.display='inline'; setTimeout(()=>er.style.display='none',3000) }
+  });
+  document.getElementById('btn-me-delete')?.addEventListener('click', async ()=>{
+    if(!confirm('حذف الحساب نهائياً؟')) return;
+    try{ await API.request({action:'delete', activationCode: state.user.activationCode}); toast('تم الحذف'); sessionStorage.removeItem('mn_user'); setTimeout(()=>location.reload(),900) }catch(e){ toast(e.message,false) }
+  });
+
+  // guide send
+  document.getElementById('guide-request-btn')?.addEventListener('click', async ()=>{
+    try{ await API.request({action:'requestAdminChat',email:state.user.email,code:state.user.activationCode}); toast('تم إرسال طلب للموجه ✓'); loadGuide(); }catch(e){ toast(e.message,false) }
+  });
+  document.getElementById('guide-send-btn')?.addEventListener('click', async ()=>{
+    const txt=$('guide-message-input').value.trim(); if(!txt||!state.guideRequestId) return;
+    try{ await API.request({action:'sendAdminChatMessage',email:state.user.email,code:state.user.activationCode,requestId:state.guideRequestId,messageText:txt}); $('guide-message-input').value=''; loadGuide(); }catch(e){ toast(e.message,false) }
+  });
+
+  // conversation send
+  document.getElementById('conversation-send-btn')?.addEventListener('click', async ()=>{
+    const txt=$('conversation-input').value.trim(); if(!txt||!state.currentConversationEmail) return toast('اختر محادثة',false);
+    try{ await API.request({action:'sendMessage',senderEmail:state.user.email,receiverEmail:state.currentConversationEmail,code:state.user.activationCode,messageText:txt}); $('conversation-input').value=''; openConv(state.currentConversationEmail); }catch(e){ toast(e.message,false) }
+  });
+
+  // admin send
+  document.getElementById('admin-send-btn')?.addEventListener('click', async ()=>{
+    const txt=$('admin-message-input').value.trim(); if(!txt||!state.adminCurrentRequest) return;
+    try{ await API.request({action:'sendAdminChatMessage',email:state.user.email,code:state.user.activationCode,requestId:state.adminCurrentRequest,messageText:txt}); $('admin-message-input').value=''; adminRead(state.adminCurrentRequest); }catch(e){ toast(e.message,false) }
+  });
+});
+</script>
+</body>
+</html>
